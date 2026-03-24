@@ -1,0 +1,302 @@
+[
+  {
+    "record_id": "REC_0208",
+    "risk_type": "aviation",
+    "territory": "EU",
+    "industry": "healthcare",
+    "limit": 4692000,
+    "premium": 84400,
+    "broker": "Brockton & Gray",
+    "prior_claims": 1,
+    "years_trading": 15,
+    "ground_truth": {
+      "is_loss_making": true,
+      "loss_ratio": 1.0028
+    }
+  },
+  {
+    "record_id": "REC_0071",
+    "risk_type": "cyber",
+    "territory": "LATAM",
+    "industry": "financial_services",
+    "limit": 28131000,
+    "premium": 234100,
+    "broker": "Hartwell & Sons",
+    "prior_claims": 5,
+    "years_trading": 34,
+    "ground_truth": {
+      "is_loss_making": false,
+      "loss_ratio": 0.9495
+    }
+  },
+  {
+    "record_id": "REC_0381",
+    "risk_type": "property",
+    "territory": "UK",
+    "industry": "transport",
+    "limit": 3640000,
+    "premium": 61400,
+    "broker": "Caldwell Specialty",
+    "prior_claims": 2,
+    "years_trading": 10,
+    "ground_truth": {
+      "is_loss_making": false,
+      "loss_ratio": 0.765
+    }
+  },
+  {
+    "record_id": "REC_0001",
+    "risk_type": "property",
+    "territory": "UK",
+    "industry": "healthcare",
+    "limit": 665000,
+    "premium": 15200,
+    "broker": "Nexus Broking",
+    "prior_claims": 1,
+    "years_trading": 28,
+    "ground_truth": {
+      "is_loss_making": true,
+      "loss_ratio": 1.021
+    }
+  },
+  {
+    "record_id": "REC_0018",
+    "risk_type": "property",
+    "territory": "UK",
+    "industry": "energy",
+    "limit": 24603000,
+    "premium": 320000,
+    "broker": "Hartwell & Sons",
+    "prior_claims": 0,
+    "years_trading": 16,
+    "ground_truth": {
+      "is_loss_making": true,
+      "loss_ratio": 1.0086
+    }
+  },
+  {
+    "record_id": "REC_0197",
+    "risk_type": "liability",
+    "territory": "APAC",
+    "industry": "financial_services",
+    "limit": 1382000,
+    "premium": 7100,
+    "broker": "Nexus Broking",
+    "prior_claims": 0,
+    "years_trading": 18,
+    "ground_truth": {
+      "is_loss_making": true,
+      "loss_ratio": 0.5603
+    }
+  },
+  {
+    "record_id": "REC_0056",
+    "risk_type": "property",
+    "territory": "EU",
+    "industry": "transport",
+    "limit": 11180000,
+    "premium": 112500,
+    "broker": "Meridian Re",
+    "prior_claims": 1,
+    "years_trading": 18,
+    "ground_truth": {
+      "is_loss_making": false,
+      "loss_ratio": 0.5885
+    }
+  },
+  {
+    "record_id": "REC_0210",
+    "risk_type": "cyber",
+    "territory": "EU",
+    "industry": "transport",
+    "limit": 3438000,
+    "premium": 27100,
+    "broker": "Meridian Re",
+    "prior_claims": 1,
+    "years_trading": 4,
+    "ground_truth": {
+      "is_loss_making": true,
+      "loss_ratio": 1.1036
+    }
+  },
+  {
+    "record_id": "REC_0190",
+    "risk_type": "liability",
+    "territory": "APAC",
+    "industry": "manufacturing",
+    "limit": 10140000,
+    "premium": 79900,
+    "broker": "Hartwell & Sons",
+    "prior_claims": 0,
+    "years_trading": 46,
+    "ground_truth": {
+      "is_loss_making": false,
+      "loss_ratio": 0.6106
+    }
+  },
+  {
+    "record_id": "REC_0022",
+    "risk_type": "liability",
+    "territory": "UK",
+    "industry": "manufacturing",
+    "limit": 15784000,
+    "premium": 369800,
+    "broker": "Pinnacle MGA",
+    "prior_claims": 1,
+    "years_trading": 43,
+    "ground_truth": {
+      "is_loss_making": false,
+      "loss_ratio": 0.9219
+    }
+  },
+  {
+    "record_id": "REC_0246",
+    "risk_type": "property",
+    "territory": "US",
+    "industry": "transport",
+    "limit": 1693000,
+    "premium": 16600,
+    "broker": "Brockton & Gray",
+    "prior_claims": 0,
+    "years_trading": 47,
+    "ground_truth": {
+      "is_loss_making": false,
+      "loss_ratio": 0.4419
+    }
+  },
+  {
+    "record_id": "REC_0160",
+    "risk_type": "cyber",
+    "territory": "US",
+    "industry": "retail",
+    "limit": 17710000,
+    "premium": 144200,
+    "broker": "Meridian Re",
+    "prior_claims": 2,
+    "years_trading": 8,
+    "ground_truth": {
+      "is_loss_making": true,
+      "loss_ratio": 1.1291
+    }
+  },
+  {
+    "record_id": "REC_0106",
+    "risk_type": "cyber",
+    "territory": "EU",
+    "industry": "technology",
+    "limit": 17686000,
+    "premium": 219800,
+    "broker": "Brockton & Gray",
+    "prior_claims": 2,
+    "years_trading": 37,
+    "ground_truth": {
+      "is_loss_making": true,
+      "loss_ratio": 1.1387
+    }
+  },
+  {
+    "record_id": "REC_0468",
+    "risk_type": "marine",
+    "territory": "US",
+    "industry": "retail",
+    "limit": 1433000,
+    "premium": 37300,
+    "broker": "Nexus Broking",
+    "prior_claims": 2,
+    "years_trading": 30,
+    "ground_truth": {
+      "is_loss_making": false,
+      "loss_ratio": 0.6575
+    }
+  },
+  {
+    "record_id": "REC_0144",
+    "risk_type": "marine",
+    "territory": "EU",
+    "industry": "healthcare",
+    "limit": 21950000,
+    "premium": 440800,
+    "broker": "Pinnacle MGA",
+    "prior_claims": 1,
+    "years_trading": 13,
+    "ground_truth": {
+      "is_loss_making": true,
+      "loss_ratio": 1.0114
+    }
+  },
+  {
+    "record_id": "REC_0398",
+    "risk_type": "property",
+    "territory": "UK",
+    "industry": "financial_services",
+    "limit": 33920000,
+    "premium": 190600,
+    "broker": "Brockton & Gray",
+    "prior_claims": 1,
+    "years_trading": 7,
+    "ground_truth": {
+      "is_loss_making": false,
+      "loss_ratio": 0.9169
+    }
+  },
+  {
+    "record_id": "REC_0463",
+    "risk_type": "cyber",
+    "territory": "LATAM",
+    "industry": "manufacturing",
+    "limit": 1160000,
+    "premium": 11700,
+    "broker": "Hartwell & Sons",
+    "prior_claims": 3,
+    "years_trading": 27,
+    "ground_truth": {
+      "is_loss_making": true,
+      "loss_ratio": 1.3481
+    }
+  },
+  {
+    "record_id": "REC_0301",
+    "risk_type": "liability",
+    "territory": "UK",
+    "industry": "healthcare",
+    "limit": 1343000,
+    "premium": 19200,
+    "broker": "Hartwell & Sons",
+    "prior_claims": 1,
+    "years_trading": 23,
+    "ground_truth": {
+      "is_loss_making": false,
+      "loss_ratio": 0.8412
+    }
+  },
+  {
+    "record_id": "REC_0070",
+    "risk_type": "marine",
+    "territory": "EU",
+    "industry": "manufacturing",
+    "limit": 3156000,
+    "premium": 92300,
+    "broker": "Brockton & Gray",
+    "prior_claims": 2,
+    "years_trading": 34,
+    "ground_truth": {
+      "is_loss_making": false,
+      "loss_ratio": 0.8037
+    }
+  },
+  {
+    "record_id": "REC_0085",
+    "risk_type": "cyber",
+    "territory": "EU",
+    "industry": "technology",
+    "limit": 45225000,
+    "premium": 428800,
+    "broker": "Pinnacle MGA",
+    "prior_claims": 0,
+    "years_trading": 18,
+    "ground_truth": {
+      "is_loss_making": true,
+      "loss_ratio": 1.0681
+    }
+  }
+]

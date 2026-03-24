@@ -1,0 +1,505 @@
+record_id,risk_type,territory,industry,limit,premium,broker,prior_claims,years_trading,loss_ratio,is_loss_making
+REC_0001,property,UK,healthcare,665000,15200,Nexus Broking,1.0,28.0,1.021,True
+REC_0002,cyber,APAC,healthcare,4126000,104900,Meridian Re,1.0,11.0,0.9007,False
+REC_0003,cyber,LATAM,energy,906000,5900,Meridian Re,1.0,7.0,1.1317,True
+REC_0004,marine,LATAM,transport,1008000,13200,Caldwell Specialty,1.0,1.0,0.8293,False
+REC_0005,marine,US,manufacturing,9195000,89200,Pinnacle MGA,1.0,1.0,0.9607,True
+REC_0006,aviation,EU,transport,3054000,35000,Meridian Re,2.0,24.0,0.677,False
+REC_0007,Property,EU,healthcare,34888000,597900,Brockton & Gray,3.0,22.0,0.5749,False
+REC_0008,cyber,US,energy,2174000,23200,Nexus Broking,2.0,2.0,1.1011,True
+REC_0009,liability,US,healthcare,14169000,142900,Brockton & Gray,1.0,18.0,0.8557,False
+REC_0010,property,US,energy,4180000,81800,Pinnacle MGA,1.0,14.0,0.6653,False
+REC_0011,marine,LATAM,technology,10444000,233900,Caldwell Specialty,0.0,29.0,0.9209,False
+REC_0012,aviation,APAC,healthcare,7913000,202700,Meridian Re,5.0,50.0,0.877,False
+REC_0013,cyber,LATAM,technology,4411000,119200,Alston Risk Partners,0.0,35.0,0.9064,False
+REC_0014,cyber,LATAM,retail,39728000,378100,Caldwell Specialty,1.0,46.0,0.8922,False
+REC_0015,cyber,LATAM,energy,2423000,17400,Meridian Re,1.0,10.0,0.7098,False
+REC_0016,cyber,UK,healthcare,1131000,9600,Brockton & Gray,0.0,11.0,0.6646,False
+REC_0017,marine,LATAM,retail,11354000,60100,Nexus Broking,0.0,38.0,0.6721,False
+REC_0018,property,UK,energy,24603000,320000,Hartwell & Sons,0.0,16.0,1.0086,True
+REC_0019,aviation,EU,manufacturing,602000,13000,Nexus Broking,0.0,43.0,0.7743,False
+REC_0020,marine,EU,manufacturing,3965000,42400,Nexus Broking,1.0,,0.3994,False
+REC_0021,marine,US,manufacturing,30475000,951500,Brockton & Gray,3.0,11.0,0.3121,False
+REC_0022,liability,UK,manufacturing,15784000,369800,Pinnacle MGA,1.0,43.0,0.9219,False
+REC_0023,property,UK,transport,48149000,625800,Meridian Re,2.0,28.0,0.7127,False
+REC_0024,aviation,LATAM,healthcare,5778000,45800,Meridian Re,0.0,41.0,0.9354,False
+REC_0025,cyber,US,healthcare,10446000,131000,Pinnacle MGA,2.0,23.0,0.8215,False
+REC_0026,cyber,US,manufacturing,2013000,20200,Hartwell & Sons,3.0,7.0,1.117,True
+REC_0027,marine,LATAM,manufacturing,39268000,678000,Caldwell Specialty,0.0,35.0,0.8023,False
+REC_0028,aviation,UK,technology,2702000,56700,Hartwell & Sons,0.0,7.0,0.7135,False
+REC_0029,marine,LATAM,energy,14997000,339400,Hartwell & Sons,2.0,34.0,11.7,True
+REC_0030,marine,LATAM,retail,3201000,58700,Brockton & Gray,1.0,21.0,0.7345,False
+REC_0031,marine,EU,energy,6647000,146200,Hartwell & Sons,1.0,40.0,0.8877,False
+REC_0032,liability,UK,technology,13757000,141300,Hartwell & Sons,2.0,,0.8974,False
+REC_0033,property,UK,healthcare,5210000,56500,Brockton & Gray,0.0,21.0,0.8053,False
+REC_0034,marine,US,retail,32594000,354500,Meridian Re,1.0,45.0,0.6469,False
+REC_0035,aviation,EU,manufacturing,3448000,33900,Alston Risk Partners,0.0,6.0,0.5129,False
+REC_0036,property,UK,healthcare,9843000,97900,Hartwell & Sons,1.0,6.0,1.1279,True
+REC_0037,aviation,EU,transport,2419000,26200,Meridian Re,1.0,50.0,0.6612,False
+REC_0038,aviation,UK,manufacturing,3276000,47400,Hartwell & Sons,1.0,29.0,0.6277,False
+REC_0039,liability,EU,energy,3794000,49400,Pinnacle MGA,0.0,23.0,0.7982,False
+REC_0040,cyber,UK,healthcare,892000,15000,Pinnacle MGA,1.0,8.0,0.9981,False
+REC_0041,property,APAC,financial_services,763000,3900,Nexus Broking,1.0,15.0,0.6004,False
+REC_0042,cyber,UK,healthcare,10813000,75900,Meridian Re,0.0,35.0,0.8569,False
+REC_0043,cyber,UK,retail,10233000,227500,Hartwell & Sons,2.0,-3.0,0.9328,False
+REC_0044,liability,UK,retail,10587000,192500,Nexus Broking,0.0,46.0,0.7815,False
+REC_0045,property,LATAM,financial_services,548000,2900,Meridian Re,3.0,,0.3557,False
+REC_0046,aviation,UK,technology,2249000,28000,Pinnacle MGA,1.0,23.0,1.1186,True
+REC_0047,marine,EU,technology,1243000,11300,Pinnacle MGA,0.0,9.0,0.7315,False
+REC_0048,aviation,EU,financial_services,18000000,189400,Alston Risk Partners,1.0,5.0,0.9545,False
+REC_0049,cyber,EU,financial_services,26317000,296800,Nexus Broking,1.0,22.0,0.6419,False
+REC_0050,cyber,APAC,manufacturing,1557000,15200,Hartwell & Sons,0.0,29.0,0.7152,False
+REC_0051,cyber,LATAM,energy,10831000,143400,Meridian Re,1.0,6.0,0.901,False
+REC_0052,property,US,retail,907000,10700,Alston Risk Partners,1.0,21.0,0.9146,False
+REC_0053,liability,LATAM,energy,1775000,16900,Nexus Broking,1.0,33.0,0.7646,False
+REC_0054,marine,US,,947000,11700,Pinnacle MGA,0.0,41.0,0.8265,False
+REC_0055,marine,LATAM,manufacturing,1845000,20600,Nexus Broking,1.0,47.0,0.5929,False
+REC_0056,property,EU,transport,11180000,112500,Meridian Re,1.0,18.0,0.5885,False
+REC_0057,marine,APAC,energy,33084000,334400,Brockton & Gray,0.0,20.0,0.6858,False
+REC_0058,property,LATAM,healthcare,1271000,11600,Alston Risk Partners,0.0,44.0,0.8611,False
+REC_0059,cyber,APAC,retail,6069000,165800,Brockton & Gray,2.0,35.0,0.5998,False
+REC_0060,cyber,LATAM,retail,12640000,228300,Alston Risk Partners,1.0,14.0,0.6612,False
+REC_0061,aviation,EU,healthcare,40255000,971400,Caldwell Specialty,1.0,35.0,0.4395,False
+REC_0062,cyber,UK,financial_services,8300000,175100,Meridian Re,2.0,8.0,0.8202,False
+REC_0063,liability,EU,technology,1619000,19000,Meridian Re,0.0,23.0,0.6339,False
+REC_0064,aviation,UK,financial_services,8911000,118200,Brockton & Gray,0.0,16.0,0.4114,False
+REC_0065,marine,LATAM,healthcare,2188000,12700,Nexus Broking,0.0,50.0,0.5779,False
+REC_0066,liability,US,retail,44795000,669300,Nexus Broking ,2.0,2.0,0.6214,False
+REC_0067,aviation,US,transport,3150000,40900,Brockton & Gray,2.0,43.0,0.6468,False
+REC_0068,liability,US,financial_services,11744000,71400,Pinnacle MGA,0.0,15.0,0.9861,False
+REC_0069,property,APAC,retail,556000,6300,Brockton & Gray,1.0,2.0,0.8366,False
+REC_0070,marine,EU,manufacturing,3156000,92300,Brockton & Gray,2.0,34.0,0.8037,False
+REC_0071,cyber,LATAM,financial_services,28131000,234100,Hartwell & Sons,5.0,34.0,0.9495,False
+REC_0072,property,EU,technology,8307000,175900,Caldwell Specialty,3.0,8.0,0.5895,False
+REC_0073,marine,US,healthcare,3862000,33600,Alston Risk Partners,2.0,2.0,0.739,False
+REC_0074,property,UK,energy,37226000,1016000,Alston Risk Partners,3.0,6.0,0.9042,False
+REC_0075,cyber,UK,energy,25523000,274100,Meridian Re,4.0,21.0,1.2763,True
+REC_0076,marine,US,technology,2205000,22300,Caldwell Specialty,1.0,7.0,0.9964,False
+REC_0077,liability,LATAM,financial_services,6139000,197800,Nexus Broking,1.0,36.0,0.9335,False
+REC_0078,liability,EU,technology,4771000,46100,Alston Risk Partners,2.0,4.0,0.8652,False
+REC_0079,marine,LATAM,retail,9191000,127500,Hartwell & Sons,0.0,40.0,0.6744,False
+REC_0080,cyber,UK,healthcare,2329000,51100,Pinnacle MGA,0.0,44.0,0.8022,False
+REC_0081,aviation,UK,transport,1540000,10600,Caldwell Specialty,2.0,36.0,0.7938,False
+REC_0082,marine,LATAM,transport,33444000,194100,Meridian Re,1.0,48.0,1.1167,True
+REC_0083,property, UK ,transport,35214000,475000,Nexus Broking,1.0,47.0,0.3528,False
+REC_0084,aviation,UK,energy,24301000,272000,Caldwell Specialty,0.0,,0.8138,False
+REC_0085,cyber,EU,technology,45225000,428800,Pinnacle MGA,0.0,18.0,1.0681,True
+REC_0086,cyber,LATAM,healthcare,15451000,258000,Caldwell Specialty,1.0,39.0,0.6561,False
+REC_0087,property,APAC,,16916000,352500,Alston Risk Partners,2.0,17.0,0.6341,False
+REC_0088,liability,UK,transport,16755000,234600,Hartwell & Sons,0.0,37.0,0.6748,False
+REC_0089,cyber,LATAM,financial_services,4573000,90700,Brockton & Gray,0.0,39.0,0.7898,False
+REC_0090,aviation,LATAM,manufacturing,4091000,63000,Hartwell & Sons,1.0,50.0,0.4427,False
+REC_0091,marine,LATAM,energy,1512000,18900,Alston Risk Partners,2.0,17.0,0.9572,False
+REC_0092,aviation,LATAM,energy,9741000,109700,Caldwell Specialty,0.0,18.0,0.8699,False
+REC_0093,aviation,US,healthcare,1895000,28400,Caldwell Specialty,0.0,2.0,0.9355,False
+REC_0094,liability,LATAM,retail,1639000,22500,Hartwell & Sons,2.0,15.0,0.7233,False
+REC_0095,aviation,US,retail,7428000,136200,Pinnacle MGA,4.0,15.0,0.9556,False
+REC_0096,liability,LATAM,manufacturing,3303000,22800,Meridian Re,3.0,23.0,0.7481,False
+REC_0097,liability,EU,healthcare,1370000,16800,Pinnacle MGA,0.0,22.0,0.7301,False
+REC_0098,cyber,APAC,healthcare,21433000,167300,Alston Risk Partners,2.0,43.0,1.3676,True
+REC_0099,cyber,APAC,manufacturing,26309000,200800,Alston Risk Partners,2.0,39.0,0.9372,False
+REC_0100,property,APAC,energy,1082000,20300,Pinnacle MGA,3.0,37.0,0.6162,False
+REC_0101,aviation,APAC,energy,518000,8400,Caldwell Specialty,1.0,1.0,0.9645,False
+REC_0102,property,APAC,energy,2351000,29500,Alston Risk Partners,0.0,24.0,0.4067,False
+REC_0103,aviation,APAC,transport,19678000,106000,Alston Risk Partners,1.0,37.0,0.5542,False
+REC_0104,property,UK,technology,23841000,134800,Caldwell Specialty,0.0,13.0,0.4586,False
+REC_0105,cyber,LATAM,retail,945000,11900,Hartwell & Sons,2.0,22.0,0.86,False
+REC_0106,cyber,EU,technology,17686000,219800,Brockton & Gray,2.0,37.0,1.1387,True
+REC_0107,cyber,US,technology,852000,12300,Meridian Re,0.0,40.0,0.9541,False
+REC_0108,cyber,EU,transport,3014000,26800,Pinnacle MGA,0.0,43.0,0.9341,False
+REC_0109,marine,LATAM,transport,49681000,335100,Meridian Re,1.0,22.0,0.5522,False
+REC_0110,cyber,LATAM,manufacturing,1214000,19000,Hartwell & Sons,0.0,20.0,0.7026,False
+REC_0111,liability,LATAM,financial_services,1016000,12600,Alston Risk Partners,0.0,20.0,0.809,False
+REC_0112,cyber,EU,technology,3504000,113200,Meridian Re,4.0,34.0,0.9769,False
+REC_0113,marine,APAC,technology,8676000,232100,Pinnacle MGA,0.0,21.0,0.6499,False
+REC_0114,marine,US,retail,36709000,567400,Pinnacle MGA,1.0,21.0,0.8094,False
+REC_0115,marine,APAC,technology,45773000,385700,Hartwell & Sons,,9.0,0.7552,False
+REC_0116,marine,APAC,energy,689000,13100,Meridian Re,1.0,24.0,0.8307,False
+REC_0117,property,US,transport,944000,14700,Alston Risk Partners,3.0,12.0,1.1107,True
+REC_0118,property,US,financial_services,19074000,157200,Nexus Broking,1.0,27.0,0.6291,False
+REC_0119,liability,UK,healthcare,1739000,40100,Hartwell & Sons,2.0,45.0,1.1223,True
+REC_0120,property,UK,energy,29422000,182000,Brockton & Gray,2.0,39.0,0.8707,False
+REC_0121,marine,EU,manufacturing,10614000,263500,Meridian Re,1.0,24.0,0.4459,False
+REC_0122,cyber,EU,manufacturing,837000,9600,Hartwell & Sons,1.0,49.0,0.6616,False
+REC_0123,cyber,UK,technology,23122000,180200,Brockton & Gray,0.0,50.0,0.7,False
+REC_0124,marine,EU,technology,1126000,11000,Hartwell & Sons,2.0,23.0,0.6661,False
+REC_0125,aviation,APAC,healthcare,3515000,56400,Nexus Broking,1.0,39.0,0.7737,False
+REC_0126,marine,US,healthcare,6358000,121100,Brockton & Gray,2.0,18.0,0.9406,True
+REC_0127,property,US,healthcare,5018000,103800,Pinnacle MGA,2.0,44.0,0.9759,False
+REC_0128,cyber, US ,financial_services,11784000,149200,Pinnacle MGA,2.0,19.0,1.0055,False
+REC_0129,marine,EU,energy,10101000,102700,Caldwell Specialty,0.0,13.0,0.6758,False
+REC_0130,cyber,US,financial_services,48201000,630100,Hartwell & Sons,1.0,7.0,0.5892,False
+REC_0131,marine,APAC,retail,49867000,319400,Pinnacle MGA,1.0,43.0,0.7427,False
+REC_0132,Marine,US,financial_services,5394000,94200,Brockton & Gray,1.0,15.0,0.7546,False
+REC_0133,Property,EU,healthcare,775000,6600,Hartwell & Sons,2.0,41.0,0.7829,False
+REC_0134,marine,US,healthcare,14278000,126100,Brockton & Gray,0.0,5.0,1.1791,True
+REC_0135,cyber,UK,financial_services,44905000,1143800,Caldwell Specialty,1.0,26.0,1.1133,True
+REC_0136,Liability,APAC,manufacturing,2166000,25700,Nexus Broking,1.0,22.0,0.9313,False
+REC_0137,cyber,US,healthcare,4182000,51100,Meridian Re,2.0,22.0,0.8068,False
+REC_0138,property,US,retail,3536000,30200,Pinnacle MGA,0.0,9.0,0.5557,False
+REC_0139,liability,APAC,healthcare,634000,5600,Meridian Re,,4.0,0.9309,False
+REC_0140,marine,LATAM,energy,11053000,14729555,Meridian Re,1.0,18.0,0.6504,False
+REC_0141,aviation,APAC,transport,2545000,28400,Alston Risk Partners,0.0,24.0,0.8001,False
+REC_0142,liability,LATAM,,18789000,173300,Hartwell & Sons,0.0,40.0,0.8142,False
+REC_0143,liability,LATAM,transport,50,416200,Nexus Broking,2.0,24.0,0.6941,False
+REC_0144,marine,EU,healthcare,21950000,440800,Pinnacle MGA,1.0,13.0,1.0114,True
+REC_0145,aviation,APAC,retail,3406000,25200,Hartwell & Sons,1.0,,0.7864,False
+REC_0146,aviation,US,energy,2198000,20100,Caldwell Specialty,3.0,31.0,0.6188,False
+REC_0147,property,EU,energy,15726000,228200,Caldwell Specialty,0.0,,0.6408,False
+REC_0148,liability,EU,healthcare,20033000,262100,Pinnacle MGA,3.0,46.0,1.0206,True
+REC_0149,aviation,LATAM,financial_services,4803000,73800,Brockton & Gray,,22.0,0.8751,False
+REC_0150,property,LATAM,healthcare,30551000,518800,Alston Risk Partners,2.0,29.0,0.6893,False
+REC_0151,aviation,EU,retail,970000,17100,Meridian Re,,4.0,1.057,True
+REC_0152,liability,APAC,energy,28649000,375700,Hartwell & Sons,1.0,10.0,0.9537,False
+REC_0153,aviation,US,energy,778000,4100,Hartwell & Sons ,0.0,43.0,0.5133,False
+REC_0154,liability,LATAM,transport,1014000,6700,Pinnacle MGA,0.0,18.0,0.5153,False
+REC_0155,marine,EU,,5843000,81500,Meridian Re,3.0,22.0,1.0521,True
+REC_0156,cyber,EU,financial_services,682000,9200,Meridian Re,3.0,30.0,1.2253,True
+REC_0157,property,APAC,manufacturing,638000,7100,Alston Risk Partners,2.0,3.0,0.8541,False
+REC_0158,marine,APAC,healthcare,501000,8400,Brockton & Gray,2.0,26.0,1.0992,True
+REC_0159,marine,UK,retail,3729000,32700,Alston Risk Partners,1.0,18.0,0.9202,False
+REC_0160,cyber,US,retail,17710000,144200,Meridian Re,2.0,8.0,1.1291,True
+REC_0161,aviation,UK,financial_services,587000,9900,Pinnacle MGA,,21.0,0.536,False
+REC_0162,cyber,APAC,energy,10081000,125900,Pinnacle MGA,1.0,23.0,1.2517,True
+REC_0163,marine,UK,healthcare,22142000,431400,Meridian Re,1.0,10.0,0.9165,False
+REC_0164,marine,US,energy,1084000,9400,Nexus Broking,1.0,28.0,0.7205,False
+REC_0165,marine,EU,energy,983000,14700,Nexus Broking,1.0,38.0,0.6697,False
+REC_0166,aviation,APAC,manufacturing,26337000,331300,Caldwell Specialty,2.0,14.0,0.8542,False
+REC_0167,liability,EU,manufacturing,22142000,294000,Alston Risk Partners,1.0,49.0,0.4892,False
+REC_0168,property,LATAM,retail,5982000,48000,Pinnacle MGA,1.0,31.0,0.7759,False
+REC_0169,liability,LATAM,transport,21746000,235100,Nexus Broking,1.0,39.0,0.6584,False
+REC_0170,property,UK,transport,766000,8300,Alston Risk Partners,1.0,4.0,0.8347,False
+REC_0171,property,LATAM,financial_services,3076000,25100,Alston Risk Partners,,39.0,0.5061,False
+REC_0172,property,APAC,financial_services,14947000,191600,Nexus Broking,0.0,,0.5524,False
+REC_0173,cyber,APAC,retail,1636000,13200,Meridian Re,0.0,36.0,0.6838,False
+REC_0174,cyber,UK,technology,15982000,312300,Alston Risk Partners,1.0,41.0,0.881,False
+REC_0175,cyber,APAC,,5097000,45200,Alston Risk Partners,1.0,13.0,1.2261,True
+REC_0176,marine,APAC,retail,15831000,211200,Brockton & Gray,0.0,13.0,0.9453,False
+REC_0177,cyber,EU,retail,4249000,47300,Meridian Re,1.0,3.0,1.0498,True
+REC_0178,property,UK,technology,2721000,16200,Caldwell Specialty,3.0,31.0,0.7954,False
+REC_0179,aviation,EU,technology,1372000,31300,Brockton & Gray,0.0,39.0,0.872,False
+REC_0180,marine,LATAM,manufacturing,1305000,10000,Nexus Broking,3.0,21.0,12.3,True
+REC_0181,aviation,APAC,financial_services,15920000,22466651,Brockton & Gray,1.0,9.0,0.6686,False
+REC_0182,property,UK,transport,865000,8300,Hartwell & Sons,0.0,16.0,0.5981,False
+REC_0183,marine,LATAM,financial_services,743000,16200,Hartwell & Sons,1.0,21.0,0.412,True
+REC_0184,cyber,LATAM,energy,1126000,15800,Alston Risk Partners,1.0,46.0,1.1422,True
+REC_0185,marine,UK,retail,1121000,28500,Caldwell Specialty,1.0,7.0,1.1757,True
+REC_0186,marine,LATAM,retail,22140000,326800,Nexus Broking,1.0,18.0,0.7444,False
+REC_0187,property,EU,manufacturing,3133000,40700,Caldwell Specialty,1.0,32.0,0.2475,False
+REC_0188,liability,EU,financial_services,47835000,352800,Caldwell Specialty ,1.0,12.0,0.9636,False
+REC_0189,liability,EU,energy,941000,23400,Brockton & Gray,0.0,45.0,0.6473,False
+REC_0190,liability, APAC ,manufacturing,10140000,79900,Hartwell & Sons,0.0,46.0,0.6106,False
+REC_0191,cyber,LATAM,retail,3948000,60500,Alston Risk Partners,0.0,20.0,0.9328,False
+REC_0192,cyber,APAC,technology,3054000,85200,Brockton & Gray,0.0,38.0,0.8958,False
+REC_0193,cyber,LATAM,technology,28128000,647100,Pinnacle MGA,2.0,38.0,0.8821,False
+REC_0194,liability,LATAM,financial_services,44685000,703000,Caldwell Specialty,1.0,35.0,0.7031,False
+REC_0195,aviation,UK,energy,27841000,383400,Meridian Re,0.0,10.0,0.8227,False
+REC_0196,property,US,financial_services,1212000,14400,Pinnacle MGA,1.0,3.0,0.6923,False
+REC_0197,liability,APAC,financial_services,1382000,7100,Nexus Broking,0.0,18.0,0.5603,True
+REC_0198,property,EU,transport,10259000,141600,Meridian Re,4.0,7.0,0.8641,False
+REC_0199,liability,UK,healthcare,1893000,25400,Caldwell Specialty,0.0,15.0,0.8611,False
+REC_0200,aviation,UK,financial_services,14737000,269000,Brockton & Gray,1.0,32.0,0.7279,False
+REC_0201,liability,EU,transport,6789000,54800,Meridian Re,0.0,30.0,0.5156,False
+REC_0202,aviation,APAC,energy,6321000,114600,Meridian Re,0.0,11.0,0.97,False
+REC_0203,marine, UK ,transport,22702000,319200,Pinnacle MGA,1.0,1.0,0.379,False
+REC_0204,cyber,UK,healthcare,13184000,160700,Meridian Re,0.0,12.0,0.8137,False
+REC_0205,Marine,UK,financial_services,565000,7200,Brockton & Gray,1.0,23.0,0.6284,False
+REC_0206,liability,EU,transport,628000,6900,Brockton & Gray,1.0,39.0,0.8567,False
+REC_0207,cyber,UK,energy,7982000,83600,Brockton & Gray,1.0,19.0,1.0411,True
+REC_0208,aviation,EU,healthcare,4692000,84400,Brockton & Gray,1.0,15.0,1.0028,True
+REC_0209,liability,EU,technology,1657000,32600,Meridian Re,0.0,28.0,0.6518,False
+REC_0210,cyber,EU,transport,3438000,27100,Meridian Re,1.0,4.0,1.1036,True
+REC_0211,liability,APAC,financial_services,16398000,199900,Caldwell Specialty,0.0,12.0,0.8292,False
+REC_0212,cyber,EU,healthcare,22501000,124100,Nexus Broking,1.0,2.0,0.7259,False
+REC_0213,cyber,APAC,energy,6629000,112100,Brockton & Gray,2.0,27.0,1.3421,True
+REC_0214,marine,APAC,transport,2949000,47000,Alston Risk Partners,1.0,,0.491,False
+REC_0215,cyber,LATAM,manufacturing,1739000,45100,Pinnacle MGA,1.0,30.0,0.9355,False
+REC_0216,liability,APAC,manufacturing,5531000,186400,Brockton & Gray,0.0,31.0,0.8002,False
+REC_0217,property,EU,energy,2130000,39700,Pinnacle MGA,1.0,20.0,0.7596,False
+REC_0218,property,EU,healthcare,6717000,133900,Caldwell Specialty,4.0,44.0,0.781,False
+REC_0219,marine,US,healthcare,11279000,186000,Caldwell Specialty,2.0,46.0,0.9789,True
+REC_0220,aviation,EU,energy,678000,7300,Nexus Broking,2.0,6.0,0.6711,False
+REC_0221,property,UK,financial_services,502000,3800,Hartwell & Sons,1.0,,0.6482,False
+REC_0222,marine,LATAM,energy,1329000,32200,Alston Risk Partners,2.0,10.0,0.7985,False
+REC_0223,cyber,LATAM,transport,30760000,234900,Pinnacle MGA,2.0,13.0,0.8641,False
+REC_0224,liability,UK,financial_services,9807000,95800,Alston Risk Partners,,27.0,0.9572,False
+REC_0225,cyber,APAC,retail,1104000,15200,Nexus Broking,0.0,2.0,1.1279,True
+REC_0226,liability,UK,transport,30165000,181200,Alston Risk Partners,0.0,19.0,0.7082,False
+REC_0227,aviation,APAC,manufacturing,4354000,25000,Brockton & Gray,1.0,10.0,0.9205,False
+REC_0228,marine,UK,transport,4479000,27900,Nexus Broking,3.0,25.0,0.879,False
+REC_0229,marine,EU,technology,37158000,331500,Nexus Broking,2.0,41.0,0.6593,False
+REC_0230,property,APAC,retail,658000,6700,Hartwell & Sons,3.0,47.0,0.7236,False
+REC_0231,marine,APAC,healthcare,1347000,23700,Alston Risk Partners,1.0,11.0,0.7581,False
+REC_0232,aviation,EU,healthcare,7422000,194800,Brockton & Gray,1.0,28.0,0.6646,False
+REC_0233,property,LATAM,,1230000,14400,Pinnacle MGA,1.0,24.0,0.7471,False
+REC_0234,cyber,APAC,healthcare,11429000,267700,Brockton & Gray,2.0,21.0,1.0222,True
+REC_0235,marine,US,financial_services,1340000,34600,Brockton & Gray,1.0,32.0,0.4537,False
+REC_0236,cyber,APAC,retail,789000,17800,Alston Risk Partners,1.0,50.0,0.5827,False
+REC_0237,cyber,APAC,manufacturing,1297000,23600,Nexus Broking,0.0,21.0,0.8764,False
+REC_0238,marine,US,manufacturing,3503000,28300,Hartwell & Sons,1.0,4.0,0.6612,False
+REC_0239,liability,APAC,retail,1125000,7900,Hartwell & Sons,1.0,46.0,0.8644,False
+REC_0240,cyber,LATAM,manufacturing,930000,15300,Meridian Re,1.0,47.0,1.0006,True
+REC_0241,property,LATAM,energy,26274000,512800,Nexus Broking,0.0,17.0,0.4212,False
+REC_0242,marine,APAC,healthcare,2187000,43400,Alston Risk Partners,1.0,26.0,0.5159,False
+REC_0243,property,APAC,transport,2633000,46500,Nexus Broking,2.0,44.0,1.0314,True
+REC_0244,cyber,US,,645000,18600,Hartwell & Sons,1.0,26.0,1.0033,True
+REC_0245,cyber,APAC,transport,2592000,18500,Meridian Re,0.0,25.0,0.7645,False
+REC_0246,property,US,transport,1693000,16600,Brockton & Gray,0.0,47.0,0.4419,False
+REC_0247,cyber,EU,transport,8316000,155800,Brockton & Gray,2.0,42.0,0.8681,False
+REC_0248,marine,US,energy,1288000,23400,Caldwell Specialty,0.0,26.0,0.5157,False
+REC_0249,cyber,US,,29902000,160000,Alston Risk Partners,1.0,9.0,1.097,True
+REC_0250,property,UK,transport,36166000,859400,Alston Risk Partners,3.0,22.0,0.6502,False
+REC_0251,property,LATAM,technology,792000,9400,Brockton & Gray,2.0,34.0,0.9368,False
+REC_0252,marine,UK,retail,820000,17100,Brockton & Gray,1.0,14.0,0.6759,False
+REC_0253,property,UK,manufacturing,850000,13000,Pinnacle MGA,,27.0,0.5622,False
+REC_0254,liability,LATAM,healthcare,8672000,176500,Caldwell Specialty,1.0,33.0,0.7733,False
+REC_0255,cyber,EU,financial_services,877000,1568606,Pinnacle MGA,2.0,5.0,0.5676,False
+REC_0256,property,EU,manufacturing,25336000,382600,Caldwell Specialty,0.0,29.0,0.5483,False
+REC_0257,cyber, APAC ,technology,16125000,308200,Caldwell Specialty,2.0,37.0,0.9394,False
+REC_0258,property,US,energy,21807000,199600,Pinnacle MGA,4.0,11.0,1.0805,True
+REC_0259,property,UK,energy,5638000,75500,Nexus Broking,1.0,28.0,0.3705,False
+REC_0260,marine,APAC,healthcare,49241000,836000,Pinnacle MGA,1.0,36.0,0.9791,False
+REC_0261,cyber,UK,technology,613000,5200,Caldwell Specialty,4.0,3.0,1.3437,True
+REC_0262,property,EU,transport,3173000,31900,Caldwell Specialty,1.0,33.0,0.8954,False
+REC_0263,liability,LATAM,energy,2223000,42700,Hartwell & Sons,0.0,13.0,0.8265,False
+REC_0264,aviation,LATAM,healthcare,39469000,560900,Pinnacle MGA,3.0,-1.0,1.0925,True
+REC_0265,aviation,US,technology,7123000,41900,Pinnacle MGA,1.0,33.0,0.5152,False
+REC_0266,marine,APAC,manufacturing,20481000,265300,Brockton & Gray,0.0,1.0,0.9003,False
+REC_0267,marine,APAC,manufacturing,1096000,8300,Nexus Broking,1.0,1.0,0.6932,False
+REC_0268,liability,EU,retail,45315000,734200,Nexus Broking,0.0,23.0,0.4527,False
+REC_0269,cyber,UK,transport,4969000,45400,Hartwell & Sons,0.0,48.0,0.6377,False
+REC_0270,marine,US,manufacturing,4856000,108600,Meridian Re,1.0,1.0,0.833,False
+REC_0271,liability,APAC,retail,43726000,1250700,Caldwell Specialty,1.0,40.0,0.6616,False
+REC_0272,property,LATAM,manufacturing,2887000,40300,Caldwell Specialty,1.0,4.0,0.7957,False
+REC_0273,property,UK,transport,3119000,50200,Caldwell Specialty,1.0,25.0,0.3445,False
+REC_0274,aviation,APAC,,7387000,139200,Caldwell Specialty,0.0,22.0,0.3171,False
+REC_0275,marine,LATAM,healthcare,902000,16200,Alston Risk Partners,1.0,24.0,1.017,True
+REC_0276,marine,LATAM,,2194000,26600,Hartwell & Sons,1.0,5.0,0.9927,False
+REC_0277,marine,EU,financial_services,1217000,23700,Caldwell Specialty,1.0,38.0,0.5511,False
+REC_0278,cyber,UK,healthcare,805000,19100,Meridian Re,2.0,14.0,0.9975,False
+REC_0279,property,US,manufacturing,26994000,220700,Caldwell Specialty,0.0,39.0,0.7535,False
+REC_0280,property,LATAM,,7545000,111100,Pinnacle MGA,0.0,33.0,0.6855,False
+REC_0281,liability,LATAM,healthcare,2608000,44700,Hartwell & Sons,,28.0,0.8767,False
+REC_0282,marine,APAC,healthcare,3283000,52000,Caldwell Specialty,4.0,16.0,1.1491,True
+REC_0283,cyber,UK,retail,3648000,71600,Hartwell & Sons,2.0,33.0,0.8085,False
+REC_0284,marine,UK,healthcare,9231000,73500,Brockton & Gray,4.0,50.0,0.9556,False
+REC_0285,marine,EU,retail,35687000,965500,Alston Risk Partners,3.0,47.0,0.8468,False
+REC_0286,aviation,EU,manufacturing,36688000,530100,Meridian Re,0.0,46.0,0.6209,False
+REC_0287,property,UK,transport,3034000,68600,Meridian Re,,11.0,0.5818,False
+REC_0288,marine,APAC,technology,2278000,18000,Hartwell & Sons,0.0,30.0,0.7131,False
+REC_0289,marine,EU,manufacturing,3991000,86100,Nexus Broking,1.0,20.0,0.7162,False
+REC_0290,marine,UK,financial_services,6837000,66500,Alston Risk Partners,3.0,,0.6713,False
+REC_0291,aviation,UK,technology,4194000,34500,Pinnacle MGA ,1.0,48.0,0.9243,False
+REC_0292,liability,EU,transport,10387000,74900,Brockton & Gray,1.0,,0.6543,False
+REC_0293,aviation,APAC,energy,6423000,60800,Caldwell Specialty,0.0,9.0,0.7687,False
+REC_0294,liability,LATAM,manufacturing,2190000,16600,Meridian Re,0.0,16.0,0.6788,False
+REC_0295,marine,EU,transport,2457000,30200,Nexus Broking,1.0,36.0,0.8145,False
+REC_0296,marine,US,energy,2859000,40700,Meridian Re,3.0,38.0,0.5286,False
+REC_0297,aviation,LATAM,technology,773000,5800,Brockton & Gray,0.0,18.0,0.8804,False
+REC_0298,marine,EU,financial_services,1074000,15600,Meridian Re,1.0,,0.6921,False
+REC_0299,liability,US,energy,13970000,201600,Nexus Broking,1.0,7.0,1.1636,True
+REC_0300,property,EU,manufacturing,3000000,39900,Nexus Broking,1.0,35.0,0.5439,False
+REC_0301,liability,UK,healthcare,1343000,19200,Hartwell & Sons,1.0,23.0,0.8412,False
+REC_0302,aviation,US,,6673000,54700,Nexus Broking,1.0,25.0,1.0945,True
+REC_0303,property,EU,financial_services,16220000,297100,Nexus Broking,2.0,41.0,0.6701,False
+REC_0304,aviation,LATAM,transport,1636000,17000,Meridian Re,0.0,1.0,1.055,True
+REC_0305,marine,APAC,financial_services,22519000,478700,Hartwell & Sons,,38.0,0.747,False
+REC_0306,property,APAC,,35808000,376200,Hartwell & Sons,0.0,14.0,0.6928,False
+REC_0307,liability,EU,technology,7830000,57400,Hartwell & Sons,2.0,47.0,0.9126,False
+REC_0308,marine,UK,technology,10886000,192100,Nexus Broking,1.0,,0.9126,False
+REC_0309,liability,US,retail,637000,13000,Hartwell & Sons,1.0,26.0,0.6866,False
+REC_0310,property,LATAM,healthcare,38905000,427700,Brockton & Gray,2.0,16.0,0.5749,False
+REC_0311,cyber,UK,energy,3047000,0,Meridian Re,0.0,12.0,0.7991,False
+REC_0312,cyber,LATAM,retail,35218000,388100,Pinnacle MGA,2.0,10.0,1.0079,True
+REC_0313,property,APAC,healthcare,7193000,64400,Pinnacle MGA,3.0,50.0,0.7703,False
+REC_0314,liability,US,healthcare,511000,13000,Nexus Broking,2.0,10.0,1.0878,True
+REC_0315,liability,APAC,transport,597000,13400,Brockton & Gray,1.0,23.0,1.0649,True
+REC_0316,cyber,LATAM,retail,11476000,219000,Hartwell & Sons,0.0,24.0,0.6443,False
+REC_0317,cyber,UK,financial_services,6673000,118600,Meridian Re,1.0,34.0,0.7579,False
+REC_0318,cyber,UK,financial_services,565000,7000,Meridian Re,0.0,43.0,0.5715,False
+REC_0319,aviation,APAC,energy,15342000,89100,Hartwell & Sons,0.0,28.0,1.1155,True
+REC_0320,cyber,LATAM,retail,25308000,182500,Caldwell Specialty,2.0,38.0,0.9948,False
+REC_0321,liability,UK,,4918000,76900,Caldwell Specialty,0.0,29.0,0.8164,False
+REC_0322,property,APAC,technology,4271000,33700,Alston Risk Partners,2.0,22.0,0.4988,False
+REC_0323,cyber,UK,energy,513000,6500,Caldwell Specialty,2.0,8.0,1.0658,True
+REC_0324,aviation,APAC,transport,18718000,147500,Brockton & Gray,2.0,11.0,0.9637,False
+REC_0325,aviation,APAC,transport,2293000,30700,Alston Risk Partners,2.0,22.0,0.7845,False
+REC_0326,liability,UK,technology,28609000,298900,Brockton & Gray,3.0,3.0,8.2,True
+REC_0327,liability,APAC,financial_services,2787000,24600,Hartwell & Sons,1.0,16.0,1.2381,True
+REC_0328,property,LATAM,manufacturing,6747000,87100,Brockton & Gray,0.0,,0.3995,False
+REC_0329,property,LATAM,financial_services,1736000,40900,Pinnacle MGA,2.0,24.0,0.536,False
+REC_0330,marine,UK,retail,1047000,22500,Brockton & Gray,1.0,41.0,0.572,False
+REC_0331,marine,US,energy,17733000,123700,Caldwell Specialty,1.0,49.0,1.0791,True
+REC_0332,liability,US,healthcare,4922000,53800,Brockton & Gray,0.0,37.0,0.9776,False
+REC_0333,Liability,EU,retail,5915000,88000,Pinnacle MGA,1.0,4.0,0.8836,False
+REC_0334,aviation,UK,healthcare,42638000,788600,Hartwell & Sons,1.0,21.0,0.7966,False
+REC_0335,marine,LATAM,energy,42279000,368800,Caldwell Specialty,2.0,37.0,0.703,False
+REC_0336,aviation,APAC,transport,25719000,634100,Hartwell & Sons,,30.0,0.8702,False
+REC_0337,aviation,LATAM,financial_services,1186000,9500,Brockton & Gray,,23.0,0.6316,False
+REC_0338,liability,UK,retail,7718000,107000,Caldwell Specialty,2.0,22.0,0.8232,False
+REC_0339,liability,UK,healthcare,28528000,488100,Meridian Re,1.0,21.0,0.9596,False
+REC_0340,aviation,LATAM,retail,2805000,23800,Nexus Broking,2.0,29.0,0.7762,False
+REC_0341,cyber,US,energy,796000,11400,Caldwell Specialty,2.0,,1.0157,True
+REC_0342,liability,APAC,manufacturing,20936000,220900,Hartwell & Sons,0.0,26.0,0.7319,False
+REC_0343,cyber,LATAM,manufacturing,4597000,76000,Alston Risk Partners,0.0,11.0,0.9852,False
+REC_0344,marine,UK,financial_services,6726000,66200,Alston Risk Partners,1.0,35.0,1.0364,True
+REC_0345,aviation, UK ,technology,46053000,283500,Alston Risk Partners,3.0,44.0,1.0054,True
+REC_0346,liability,UK,transport,8192000,155800,Pinnacle MGA,0.0,26.0,0.9146,False
+REC_0347,aviation,UK,healthcare,3539000,24600,Caldwell Specialty,1.0,20.0,0.754,False
+REC_0348,aviation,UK,financial_services,2748000,25100,Nexus Broking,4.0,48.0,0.8126,False
+REC_0349,property,LATAM,healthcare,3421000,50200,Nexus Broking,2.0,33.0,0.8677,False
+REC_0350,property,APAC,financial_services,863000,12200,Meridian Re,0.0,22.0,0.6308,False
+REC_0351,marine,LATAM,manufacturing,19430000,194500,Hartwell & Sons,0.0,2.0,0.5079,False
+REC_0352,property,LATAM,retail,23681000,281600,Meridian Re,1.0,1.0,0.7129,False
+REC_0353,liability,LATAM,energy,1853000,20800,Nexus Broking,3.0,12.0,6.8,True
+REC_0354,marine,US,transport,2026000,14200,Meridian Re,1.0,12.0,0.6921,False
+REC_0355,aviation,US,technology,28031000,360800,Hartwell & Sons,2.0,37.0,1.1067,True
+REC_0356,aviation,LATAM,energy,558000,6300,Alston Risk Partners,0.0,26.0,0.8364,False
+REC_0357,property,US,retail,5494000,28200,Caldwell Specialty,0.0,50.0,0.8372,False
+REC_0358,aviation,UK,manufacturing,4230000,88700,Pinnacle MGA,2.0,28.0,0.8374,False
+REC_0359,property,APAC,manufacturing,12001000,195300,Nexus Broking,0.0,46.0,0.5846,False
+REC_0360,cyber,LATAM,retail,1061000,18500,Alston Risk Partners,1.0,28.0,0.7114,False
+REC_0361,aviation,LATAM,manufacturing,10855000,101800,Alston Risk Partners,4.0,18.0,0.9121,False
+REC_0362,aviation,LATAM,manufacturing,2834000,99900,Caldwell Specialty,1.0,36.0,0.7323,True
+REC_0363,liability,UK,retail,8638000,222400,Alston Risk Partners,0.0,23.0,0.5039,False
+REC_0364,aviation,APAC,technology,601000,13400,Caldwell Specialty,1.0,14.0,0.7009,False
+REC_0365,property, LATAM ,energy,4192000,54000,Alston Risk Partners,3.0,24.0,0.7718,False
+REC_0366,marine,APAC,,5540000,96800,Caldwell Specialty,2.0,34.0,0.8444,False
+REC_0367,marine,LATAM,retail,1342000,24900,Hartwell & Sons,3.0,19.0,0.933,False
+REC_0368,liability,LATAM,energy,951000,14600,Alston Risk Partners,0.0,36.0,0.7054,False
+REC_0369,property,EU,transport,1191000,8100,Hartwell & Sons,1.0,50.0,0.7544,False
+REC_0370,cyber,UK,financial_services,2439000,24200,Alston Risk Partners,0.0,21.0,0.7972,False
+REC_0371,liability,EU,transport,781000,17000,Hartwell & Sons,1.0,15.0,0.3235,False
+REC_0372,cyber, US ,retail,39229000,478500,Meridian Re,,21.0,0.7328,False
+REC_0373,marine,UK,energy,3228000,31400,Pinnacle MGA,1.0,42.0,0.9842,False
+REC_0374,liability,UK,retail,20745000,263000,Brockton & Gray,1.0,9.0,0.5653,False
+REC_0375,aviation,APAC,transport,44443000,270600,Caldwell Specialty,1.0,49.0,0.7903,False
+REC_0376,property,EU,transport,725000,12900,Hartwell & Sons,1.0,21.0,0.9553,False
+REC_0377,cyber,EU,transport,10053000,152900,Meridian Re,1.0,43.0,0.7631,False
+REC_0378,cyber,APAC,healthcare,27656000,185300,Brockton & Gray,0.0,40.0,0.8604,False
+REC_0379,liability,EU,energy,9278000,88700,Alston Risk Partners,,40.0,0.7553,False
+REC_0380,liability,APAC,energy,999999999,23600,Hartwell & Sons,0.0,46.0,1.1029,True
+REC_0381,property,UK,transport,3640000,61400,Caldwell Specialty,2.0,10.0,0.765,False
+REC_0382,aviation,LATAM,technology,590000,6200,Meridian Re,2.0,30.0,0.8484,False
+REC_0383,aviation,EU,retail,5864000,48100,Meridian Re,1.0,5.0,1.0838,True
+REC_0384,liability,UK,transport,48535000,1280300,Alston Risk Partners,0.0,15.0,0.8991,False
+REC_0385,property,LATAM,retail,41341000,731000,Pinnacle MGA,1.0,3.0,0.5984,False
+REC_0386,property,APAC,technology,602000,7700,Meridian Re,3.0,35.0,0.6835,False
+REC_0387,property,UK,energy,12899000,173500,Pinnacle MGA,0.0,31.0,0.7391,False
+REC_0388,aviation,UK,retail,2007000,24700,Caldwell Specialty,1.0,38.0,9.4,True
+REC_0389,aviation,UK,transport,31985000,427100,Hartwell & Sons,3.0,,0.5669,False
+REC_0390,property,US,transport,615000,5900,Nexus Broking,1.0,17.0,0.6604,False
+REC_0391,cyber,UK,retail,37215000,995200,Meridian Re,1.0,34.0,0.6136,False
+REC_0392,property,APAC,energy,23655000,378100,Meridian Re,0.0,42.0,0.9409,False
+REC_0393,liability,EU,transport,859000,9200,Brockton & Gray,2.0,45.0,0.9218,False
+REC_0394,marine,LATAM,healthcare,659000,8800,Pinnacle MGA,0.0,4.0,0.6451,False
+REC_0395,cyber,APAC,technology,23355000,271800,Hartwell & Sons,1.0,21.0,0.7842,False
+REC_0396,aviation,APAC,financial_services,1024000,8400,Alston Risk Partners,0.0,1.0,0.4819,False
+REC_0397,property,EU,financial_services,5872000,125600,Pinnacle MGA,1.0,41.0,0.4621,False
+REC_0398,property,UK,financial_services,33920000,190600,Brockton & Gray,1.0,7.0,0.9169,False
+REC_0399,liability,UK,manufacturing,6821000,55100,Alston Risk Partners,0.0,42.0,1.1317,True
+REC_0400,liability,APAC,retail,3115000,66600,Caldwell Specialty,0.0,8.0,0.9468,False
+REC_0401,aviation,UK,healthcare,3882000,85300,Nexus Broking,0.0,1.0,0.8354,False
+REC_0402,cyber,UK,technology,669000,7300,Nexus Broking,0.0,44.0,0.7722,False
+REC_0403,liability,US,retail,43299000,364500,Alston Risk Partners,1.0,22.0,0.6378,False
+REC_0404,aviation,LATAM,retail,2091000,17500,Meridian Re,2.0,22.0,1.1808,True
+REC_0405,marine,EU,technology,1196000,15100,Caldwell Specialty ,2.0,33.0,0.786,False
+REC_0406,marine,APAC,technology,1867000,13600,Meridian Re,0.0,14.0,1.0988,True
+REC_0407,marine,EU,retail,42434000,643100,Caldwell Specialty,1.0,35.0,0.9808,False
+REC_0408,property,UK,transport,772000,12200,Meridian Re,1.0,22.0,0.3567,False
+REC_0409,aviation,US,manufacturing,27138000,335000,Hartwell & Sons,1.0,14.0,0.6281,False
+REC_0410,property,UK,technology,13021000,193200,Brockton & Gray,1.0,20.0,0.5596,False
+REC_0411,Property,APAC,manufacturing,22856000,398900,Hartwell & Sons,1.0,,0.7376,False
+REC_0412,liability,UK,energy,44747000,532800,Brockton & Gray,0.0,16.0,0.8011,False
+REC_0413,liability,US,technology,24170000,326000,Hartwell & Sons,4.0,30.0,1.5593,True
+REC_0414,property,LATAM,healthcare,38524000,1186600,Alston Risk Partners,1.0,7.0,0.5701,False
+REC_0415,property,EU,financial_services,897000,13800,Caldwell Specialty,1.0,6.0,0.7832,False
+REC_0416,cyber,EU,healthcare,19523000,341100,Nexus Broking,2.0,33.0,1.091,True
+REC_0417,aviation,EU,financial_services,6171000,87500,Meridian Re,2.0,22.0,0.8197,False
+REC_0418,property,APAC,energy,6109000,79600,Nexus Broking,0.0,7.0,0.7438,False
+REC_0419,liability,US,transport,31392000,439900,Nexus Broking,0.0,38.0,0.5819,False
+REC_0420,marine,APAC,energy,43911000,747700,Nexus Broking,2.0,39.0,0.8692,False
+REC_0421,aviation,LATAM,transport,12842000,86300,Caldwell Specialty,1.0,2.0,0.9761,False
+REC_0422,cyber,EU,transport,4622000,92400,Nexus Broking,1.0,11.0,1.001,True
+REC_0423,cyber,EU,financial_services,4091000,52000,Alston Risk Partners,2.0,19.0,1.0526,True
+REC_0424,marine,UK,financial_services,2962000,18100,Nexus Broking,0.0,37.0,0.9343,False
+REC_0425,marine,US,technology,2643000,19400,Caldwell Specialty,3.0,4.0,1.1467,True
+REC_0426,property,LATAM,healthcare,3034000,22600,Hartwell & Sons,1.0,41.0,0.7028,False
+REC_0427,aviation,EU,financial_services,756000,4900,Caldwell Specialty,1.0,16.0,0.5511,False
+REC_0428,aviation,US,transport,714000,9000,Hartwell & Sons,1.0,7.0,0.736,False
+REC_0429,property,EU,technology,18143000,295900,Meridian Re,0.0,44.0,0.5805,False
+REC_0430,cyber,EU,healthcare,3900000,39600,Brockton & Gray,1.0,5.0,1.0554,True
+REC_0431,property,EU,energy,36336000,358400,Hartwell & Sons,2.0,7.0,0.7579,False
+REC_0432,cyber,APAC,technology,8383000,61400,Nexus Broking,0.0,48.0,0.6816,False
+REC_0433,aviation,US,technology,588000,9900,Alston Risk Partners,1.0,26.0,0.5661,False
+REC_0434,property,APAC,energy,1033000,21600,Brockton & Gray,3.0,24.0,0.5328,False
+REC_0435,marine,EU,retail,1290000,12500,Meridian Re,1.0,35.0,0.6877,False
+REC_0436,property,LATAM,manufacturing,44714000,385900,Meridian Re,1.0,,0.3655,False
+REC_0437,marine,UK,retail,1369000,26200,Caldwell Specialty,1.0,31.0,0.5499,False
+REC_0438,aviation,UK,financial_services,5376000,74400,Nexus Broking,0.0,2.0,15.0,True
+REC_0439,Property,EU,retail,37267000,311600,Brockton & Gray,1.0,28.0,0.4095,False
+REC_0440,liability,EU,transport,45015000,598000,Meridian Re,2.0,14.0,0.9764,False
+REC_0441,aviation,APAC,healthcare,1485000,9900,Meridian Re,0.0,41.0,0.8632,False
+REC_0442,liability,EU,energy,627000,6500,Meridian Re,0.0,26.0,0.7111,False
+REC_0443,property,LATAM,transport,1014000,11000,Brockton & Gray,0.0,7.0,0.6053,False
+REC_0444,marine,EU,energy,669000,9200,Hartwell & Sons,1.0,45.0,0.8867,False
+REC_0445,marine,UK,manufacturing,1228000,26600,Caldwell Specialty,,15.0,0.5915,False
+REC_0446,cyber,UK,manufacturing,6857000,102900,Hartwell & Sons,0.0,14.0,0.6771,False
+REC_0447,liability,LATAM,transport,33409000,392300,Meridian Re,2.0,47.0,1.1054,True
+REC_0448,aviation,UK,transport,5935000,66900,Brockton & Gray,2.0,39.0,0.9892,False
+REC_0449,marine,LATAM,healthcare,8932000,81900,Hartwell & Sons,1.0,43.0,0.8783,False
+REC_0450,liability,US,manufacturing,1267000,22100,Caldwell Specialty,2.0,34.0,1.0166,True
+REC_0451,aviation,UK,retail,19959000,491800,Brockton & Gray,2.0,46.0,0.4541,False
+REC_0452,aviation,US,manufacturing,8601000,110300,Pinnacle MGA,0.0,6.0,0.9957,False
+REC_0453,marine,APAC,manufacturing,26745000,450500,Hartwell & Sons,2.0,30.0,0.8406,False
+REC_0454,property,EU,technology,39505000,374200,Nexus Broking,,15.0,0.8719,False
+REC_0455,marine,APAC,financial_services,2482000,42500,Brockton & Gray,0.0,20.0,0.7497,False
+REC_0456,Marine,APAC,manufacturing,759000,14400,Caldwell Specialty,2.0,12.0,0.8128,False
+REC_0457,property,EU,transport,1415000,23100,Nexus Broking,0.0,11.0,0.6024,False
+REC_0458,cyber,APAC,energy,3755000,79600,Nexus Broking,1.0,23.0,1.0061,True
+REC_0459,aviation,LATAM,,38937000,736600,Pinnacle MGA,1.0,46.0,0.7239,False
+REC_0460,property,EU,energy,2855000,47500,Meridian Re,0.0,32.0,0.8062,False
+REC_0461,cyber,UK,,17399000,240700,Alston Risk Partners,1.0,18.0,0.6344,False
+REC_0462,property,EU,retail,6025000,82000,Brockton & Gray,1.0,22.0,0.5525,False
+REC_0463,cyber,LATAM,manufacturing,1160000,11700,Hartwell & Sons,3.0,27.0,1.3481,True
+REC_0464,marine,US,manufacturing,2190000,12800,Alston Risk Partners,2.0,13.0,0.6833,False
+REC_0465,property,LATAM,healthcare,10124000,188700,Alston Risk Partners,0.0,27.0,0.587,False
+REC_0466,aviation,EU,manufacturing,11083000,188800,Alston Risk Partners,,35.0,0.5711,False
+REC_0467,property,APAC,financial_services,3702000,68200,Caldwell Specialty,2.0,13.0,0.8065,False
+REC_0468,marine,US,retail,1433000,37300,Nexus Broking,2.0,30.0,0.6575,False
+REC_0469,property,LATAM,healthcare,13893000,164300,Alston Risk Partners,1.0,36.0,0.6566,False
+REC_0470,aviation,UK,manufacturing,1088000,17000,Meridian Re,2.0,26.0,0.9428,False
+REC_0471,cyber,US,transport,37352000,574900,Alston Risk Partners,1.0,15.0,0.7842,False
+REC_0472,aviation,EU,,1188000,7700,Brockton & Gray,1.0,28.0,0.902,False
+REC_0473,marine,EU,energy,820000,17000,Pinnacle MGA,4.0,40.0,1.118,True
+REC_0474,Marine,EU,technology,4946000,49500,Caldwell Specialty,3.0,12.0,1.1039,True
+REC_0475,cyber,UK,,5471000,67400,Nexus Broking,1.0,29.0,0.9253,False
+REC_0476,cyber,US,,5192000,36600,Hartwell & Sons,2.0,35.0,1.5234,True
+REC_0477,aviation,UK,energy,3735000,29600,Brockton & Gray,0.0,17.0,0.9398,False
+REC_0478,property,EU,retail,48820000,595800,Caldwell Specialty,2.0,20.0,0.7685,False
+REC_0479,cyber,US,technology,4694000,83800,Hartwell & Sons,1.0,45.0,0.7523,False
+REC_0480,property,EU,retail,4517000,27200,Alston Risk Partners,4.0,19.0,0.8125,False
+REC_0481,liability,EU,technology,3487000,33900,Pinnacle MGA,1.0,30.0,1.0967,True
+REC_0482,aviation,APAC,manufacturing,680000,5900,Pinnacle MGA,0.0,8.0,1.0437,True
+REC_0483,liability,EU,retail,7672000,134100,Hartwell & Sons,0.0,47.0,1.0161,True
+REC_0484,cyber,APAC,manufacturing,1429000,18600,Alston Risk Partners,2.0,30.0,1.0613,True
+REC_0485,marine,EU,retail,9423000,98100,Pinnacle MGA,,39.0,0.564,False
+REC_0486,liability,APAC,transport,632000,6700,Alston Risk Partners,0.0,,0.8577,False
+REC_0487,liability,APAC,technology,45893000,664200,Alston Risk Partners,0.0,18.0,0.5565,False
+REC_0488,marine,US,manufacturing,4335000,42400,Meridian Re,1.0,18.0,0.4423,True
+REC_0489,cyber,US,manufacturing,31080000,793600,Meridian Re,1.0,36.0,0.903,False
+REC_0490,cyber,APAC,energy,4468000,97400,Brockton & Gray,3.0,43.0,1.1542,True
+REC_0491,aviation,US,technology,660000,9300,Nexus Broking,2.0,7.0,1.0766,True
+REC_0492,aviation,EU,energy,22049000,432700,Nexus Broking,0.0,43.0,0.8395,False
+REC_0493,cyber,UK,manufacturing,9893000,146900,Caldwell Specialty,0.0,42.0,0.8957,False
+REC_0494,cyber,EU,retail,18301000,333400,Pinnacle MGA,0.0,6.0,0.7248,False
+REC_0495,liability,EU,retail,3592000,43300,Alston Risk Partners,1.0,6.0,0.8731,False
+REC_0496,marine,APAC,energy,9437000,285100,Hartwell & Sons,0.0,35.0,0.4587,False
+REC_0497,property,EU,energy,25789000,680400,Nexus Broking,1.0,43.0,0.3494,False
+REC_0498,liability,US,healthcare,9143000,47800,Brockton & Gray,1.0,,0.9833,False
+REC_0499,aviation,LATAM,energy,2479000,21100,Meridian Re,,33.0,0.6144,False
+REC_0500,marine,EU,healthcare,10569000,166600,Meridian Re,0.0,50.0,0.867,False
+REC_0501,marine,LATAM,,2194000,26782,Hartwell & Sons,1.0,5.0,0.9927,False
+REC_0502,cyber,EU,transport,3438000,26904,Meridian Re,1.0,4.0,1.1036,True
+REC_0503,cyber,LATAM,retail,1061000,18329,Alston Risk Partners,1.0,28.0,0.7114,False
+REC_0504,property,LATAM,technology,792000,9392,Brockton & Gray,2.0,34.0,0.9368,False

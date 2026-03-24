@@ -1,0 +1,21 @@
+[project]
+name = "torch-techtest"
+version = "0.1.0"
+description = "Torch take-home exercise — assessment agent skeleton"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "anthropic>=0.40",
+    "chromadb>=0.6",
+    "sentence-transformers>=3.0",
+    "scikit-learn>=1.5",
+    "pandas>=2.0",
+    "numpy>=1.26",
+    "matplotlib>=3.8",
+    "seaborn>=0.13",
+    "jupyter>=1.0",
+    "ipykernel>=6.0",
+    "python-dotenv>=1.0",
+    "pydantic>=2.0",
+]
