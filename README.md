@@ -63,7 +63,7 @@ Implement `score_recommendation()` in `evals/eval.py` and run the harness agains
 
 ### Part 3 — Response Contract (in the app)
 
-The agent loop is already wired to the `/assess` endpoint. Your job is to design `AssessResponse` in `app/main.py`.
+The agent loop is already wired to the `/assess` endpoint. Your job is to design `AssessResponse` in `app/schemas.py`.
 
 What fields does a non-technical reviewer actually need to see? What would make this response useful — or useless — in practice? Justify your design in `APPROACH.md`.
 
@@ -115,6 +115,14 @@ The API will be available at `http://localhost:8000`.
 - `POST /assess` — run the assessment agent on a new record
 
 Interactive docs: `http://localhost:8000/docs`
+
+To test the assess endpoint with the provided example record:
+
+```bash
+curl -X POST http://localhost:8000/assess \
+  -H 'Content-Type: application/json' \
+  -d "{\"record\": $(cat data/new_record.json)}"
+```
 
 ---
 
