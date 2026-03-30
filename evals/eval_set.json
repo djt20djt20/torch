@@ -11,7 +11,8 @@
     "years_trading": 15,
     "ground_truth": {
       "is_loss_making": true,
-      "loss_ratio": 1.0028
+      "loss_ratio": 1.0028,
+      "case_type": "borderline"
     }
   },
   {
@@ -26,7 +27,8 @@
     "years_trading": 34,
     "ground_truth": {
       "is_loss_making": false,
-      "loss_ratio": 0.9495
+      "loss_ratio": 0.9495,
+      "case_type": "borderline"
     }
   },
   {
@@ -71,7 +73,8 @@
     "years_trading": 16,
     "ground_truth": {
       "is_loss_making": true,
-      "loss_ratio": 1.0086
+      "loss_ratio": 1.0086,
+      "case_type": "borderline"
     }
   },
   {
@@ -85,7 +88,7 @@
     "prior_claims": 0,
     "years_trading": 18,
     "ground_truth": {
-      "is_loss_making": true,
+      "is_loss_making": false,
       "loss_ratio": 0.5603
     }
   },
@@ -161,7 +164,8 @@
     "years_trading": 47,
     "ground_truth": {
       "is_loss_making": false,
-      "loss_ratio": 0.4419
+      "loss_ratio": 0.4419,
+      "case_type": "clear_profit"
     }
   },
   {
@@ -251,7 +255,8 @@
     "years_trading": 27,
     "ground_truth": {
       "is_loss_making": true,
-      "loss_ratio": 1.3481
+      "loss_ratio": 1.3481,
+      "case_type": "clear_loss"
     }
   },
   {

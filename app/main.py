@@ -51,4 +51,5 @@ def assess(request: AssessRequest) -> AssessResponse:
     return AssessResponse(
         record_id=request.record.get("record_id", "unknown"),
         recommendation=result["recommendation"],
+        tools_used=result.get("tools_used", []),
     )

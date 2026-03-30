@@ -1,17 +1,21 @@
 """
 Request and response schemas for the assessment API.
 
-TODO — AssessResponse is your design decision (Part 3).
+AssessResponse is your most important design decision in Part 3. This is not
+boilerplate — it is the contract between your system and the people who use it.
 
-What does a non-technical reviewer actually need to see?
-Replace or extend the fields below to match the recommendation your agent produces,
-then justify your choices in APPROACH.md.
+What does a non-technical reviewer actually need to see? Replace or extend the
+fields below and justify your choices in APPROACH.md. We will read both together.
 
 Things to consider:
 - How do you surface model confidence in a way a reviewer can act on?
 - When should the response tell the reviewer to seek a second opinion?
 - What from the retrieved similar records is genuinely useful vs noise?
 - What would an auditor need to see in this response six months later?
+- What is the minimum a reviewer needs to make a decision — and what clutters it?
+
+There is no single correct schema. We are looking for a clear point of view,
+not a complete one.
 """
 
 from __future__ import annotations

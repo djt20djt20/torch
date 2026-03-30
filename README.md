@@ -4,9 +4,22 @@
 
 This exercise is designed to take **2–3 hours**. We are not looking for a perfect solution — we are looking for how you think, the decisions you make, and how you approach building something that could realistically go to production.
 
-Use whatever tools you like, including AI copilots such as Claude Code, Cursor, or GitHub Copilot. We actively encourage this — how you use these tools is part of what we are interested in.
+Use AI tools — Claude Code, Cursor, Copilot, whatever you prefer. We expect you to use them. A working solution produced with AI assistance in two hours is not impressive on its own. What we are looking for is the judgment you applied on top of it: what you changed, what you rejected, and why.
 
 Simple and clear beats complex and clever. If you are spending time gold-plating, stop.
+
+## How we assess
+
+We grade judgment, not completeness. A submission where every part is finished but none of it shows a clear point of view is weaker than one where half the parts are done but the decisions are well-reasoned and owned.
+
+We are specifically looking for:
+- Whether you understood the problem before you started building
+- Whether your agent reasons or just calls everything unconditionally
+- Whether your output would actually be useful to a non-technical reviewer
+- Whether you can define what "correct" means for an AI system, not just implement it
+- Whether you know when to defer to a human
+
+Using an AI tool to fill in stubs without thinking is visible. Using it to move faster while you focus on the hard decisions is exactly what we want to see.
 
 ---
 
@@ -200,11 +213,12 @@ A GitHub repo (public or private — if private, please invite us) containing:
 - Your completed eval harness (`evals/eval.py`) with results
 - Your saved model artifact (`app/artifacts/model.pkl`)
 - A short `APPROACH.md` (one page maximum) covering:
-  - The decisions you made and why
+  - The decisions you made and why — not a list of what you built, but why you made the specific choices you did
   - What you would do differently with more time
-  - Where you used AI copilots and how
-  - How you would design a feedback loop so that reviewer decisions improve the system over time
-  - What you would need to think about before putting this into production — including cost, monitoring, and when the system should defer to a human
+  - Where your AI tool made a suggestion you changed, rejected, or overrode — and why. What did you decide that it could not decide for you?
+  - How would you know if the model was degrading in production? What signals would tell you the training data is no longer representative of what you are seeing?
+  - How would you design a feedback loop so that reviewer decisions flow back into the model — not just as labels, but as a way to catch where the system is systematically wrong?
+  - What would you need in place before putting this into production — covering cost, latency, monitoring, and the conditions under which the system should stop making recommendations and defer to a human
 
 ---
 

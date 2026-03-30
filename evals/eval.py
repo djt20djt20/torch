@@ -45,19 +45,29 @@ def score_recommendation(recommendation: str, ground_truth: dict) -> dict:
             correct   (bool)   — did the recommendation align with the actual outcome?
             reasoning (str)    — brief explanation of why you scored it this way
 
-    Hints:
-        - Think carefully about what "correct" means here. A binary correct/incorrect
-          may not capture everything useful — a confident wrong prediction is worse
-          than an uncertain one.
-        - Consider whether the agent flagged appropriate uncertainty when the loss
-          ratio was close to 1.0 (borderline cases).
-        - You might use the LLM itself as a judge — prompt it to extract the
-          agent's implied prediction from the recommendation text and compare to
-          ground truth. Or use a simpler heuristic. Both are valid; explain your choice.
-        - What other dimensions matter beyond binary accuracy? Think about:
-            - Does the recommendation mention relevant risk factors?
-            - Is the uncertainty expressed proportionate to the actual loss ratio?
-            - Would a non-technical reviewer find it useful?
+    Approach:
+        Use an LLM as judge. Prompt it to extract the agent's implied prediction and
+        confidence from the recommendation text, then compare to ground truth. This
+        is the right tool for scoring free text — a regex heuristic will miss nuance
+        and give you false confidence in your eval. Explain your prompting approach
+        in APPROACH.md.
+
+    Scoring dimensions to consider (you do not have to use all of these, but address
+    at least three and explain why you chose them):
+
+        - Outcome alignment  — does the recommendation point in the right direction?
+        - Calibration        — is the expressed certainty proportionate to the actual
+                               loss ratio? A confident wrong answer on a borderline case
+                               (loss_ratio near 1.0) is worse than an uncertain one.
+        - Actionability      — would a non-technical reviewer know what to do next?
+        - Evidence quality   — does the response cite relevant features or similar cases,
+                               or does it make claims without grounding?
+        - Safe deferral      — does the system appropriately hedge or escalate when
+                               evidence is weak or conflicting?
+
+    Records in the eval set are annotated with a "case_type" field for borderline
+    and clear cases — use these to analyse whether your agent's calibration holds
+    up under different conditions, not just its average accuracy.
     """
     raise NotImplementedError(
         "Implement score_recommendation() in evals/eval.py. "

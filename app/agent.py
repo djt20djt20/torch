@@ -24,6 +24,8 @@ from app.tools import TOOLS, dispatch_tool
 
 # TODO — set a sensible limit. Consider: what are the cost and latency implications
 # of setting this too high? What failure mode does it guard against?
+# Justify your choice in APPROACH.md — there is no single right answer, but there
+# is a right way to reason about it.
 MAX_ITERATIONS: int = ...  # type: ignore[assignment]
 
 # TODO — write the system prompt. The agent needs to know:
@@ -31,6 +33,8 @@ MAX_ITERATIONS: int = ...  # type: ignore[assignment]
 #   - what each tool does and when to use it (vs when not to)
 #   - what a useful recommendation looks like to a non-technical reviewer
 #   - how to handle uncertainty (low confidence, poor retrieval, ambiguous record)
+# Justify the key choices in your prompt in APPROACH.md. What did you instruct the
+# agent to do that it would not have done by default? What did you explicitly rule out?
 SYSTEM_PROMPT: str = ...  # type: ignore[assignment]
 
 
@@ -107,4 +111,8 @@ def run_agent(record: dict) -> dict[str, Any]:
         "No recommendation produced.",
     )
 
+    # tools_used is provided as a starting point. Add any other fields to this dict
+    # that you think are worth capturing — what the agent did, how confident it was,
+    # whether it hit any uncertainty conditions. What you choose to surface here is
+    # itself a design decision.
     return {"recommendation": final_text, "tools_used": tools_used}
