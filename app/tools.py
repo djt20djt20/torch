@@ -89,8 +89,6 @@ def run_predict_loss(record: dict) -> dict:
     """
     Run the ML model on the given record and return a structured prediction.
 
-    TODO — implement this function.
-
     Steps:
         1. Call app.model.load_model() to load the trained artifact.
         2. Call app.model.predict(model, record) and return its output.
@@ -107,10 +105,14 @@ def run_predict_loss(record: dict) -> dict:
     The agent will use `confidence` to decide how much weight to place on the
     model's output — low confidence should influence the recommendation.
     """
-    raise NotImplementedError(
-        "Implement run_predict_loss() in app/tools.py. "
-        "See the docstring above for implementation guidance."
-    )
+    from app import model as _model
+
+    try:
+        artifact = _model.load_model()
+    except FileNotFoundError as e:
+        return {"error": str(e)}
+
+    return _model.predict(artifact, record)
 
 
 def run_retrieve_similar_records(query: str, n_results: int = 3) -> list[dict]:
