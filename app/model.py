@@ -130,7 +130,7 @@ def predict(model: Any, record: dict) -> dict:
     # ------------------------------------------------------------------
     # 4. Target-encode categoricals using the saved encoder
     # ------------------------------------------------------------------
-    df_raw = pd.DataFrame([row])
+    df_raw = pd.DataFrame([row])[_EXPECTED_COLS]
     df_enc = encoder.transform(df_raw)
 
     # ------------------------------------------------------------------

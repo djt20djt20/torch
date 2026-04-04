@@ -20,34 +20,31 @@ from typing import Any
 import anthropic
 
 from app.llm import MODEL, get_client
-from app.tools import TOOLS, dispatch_tool
+from app.tools import RETRIEVAL_TOOLS, dispatch_tool, run_predict_loss
 
-# TODO — set a sensible limit. Consider: what are the cost and latency implications
-# of setting this too high? What failure mode does it guard against?
-# Justify your choice in APPROACH.md — there is no single right answer, but there
-# is a right way to reason about it.
-MAX_ITERATIONS: int = 4
+# The model is always called unconditionally before the agent loop — there is no
+# decision to make about whether to run it. MAX_ITERATIONS therefore only needs to
+# cover: (1) the LLM deciding to call retrieve_similar_records, (2) the LLM
+# synthesising a final answer. Two iterations is sufficient; three provides a small
+# buffer if the LLM emits a reasoning step before its tool call.
+MAX_ITERATIONS: int = 3
 
 SYSTEM_PROMPT: str = """You are an insurance underwriting assistant helping reviewers assess incoming records.
 
 Your job is to produce a clear, plain-English recommendation for each record — not a data dump, but a useful summary a non-technical underwriter can act on immediately.
 
-## Tools
+You will be given the record and the output of a loss-prediction model that has already been run. You do not need to run the model yourself.
 
-You have two tools:
+## Tool
 
-1. **predict_loss** — runs a trained ML model to estimate whether the record is likely to be loss-making.
-   - Call this first, always. It provides the quantitative anchor for your recommendation.
-   - The result includes: a binary prediction, a confidence score (0–1), top features driving the prediction, and any data quality warnings.
-   - Pay attention to confidence. Below 0.55 is effectively uncertain — say so and recommend human review.
+You have one tool available:
 
-2. **retrieve_similar_records** — searches the historical archive for similar past records.
-   - Call this after predict_loss to add context from comparable cases.
-   - Write the query as a plain-English description of the account (e.g. "cyber insurance for a healthcare company in APAC with prior claims").
-   - If the returned records have high cosine distance (above 0.4), they are not meaningfully similar — say so rather than citing them as if they were relevant.
-   - Do not call this tool more than once.
-
-Do not call either tool more than once. Do not call tools in parallel.
+**retrieve_similar_records** — searches the historical archive for similar past records.
+- Call this to add context from comparable historical cases.
+- Write the query as a plain-English description of the account (e.g. "cyber insurance for a healthcare company in APAC with prior claims").
+- If the returned records have high cosine distance (above 0.4), they are not meaningfully similar — say so rather than citing them as if they were relevant.
+- You may skip this tool if the model prediction is very high confidence (above 0.85) and no data quality warnings were raised — in that case you already have sufficient evidence for a recommendation.
+- Do not call this tool more than once.
 
 ## Recommendation format
 
@@ -67,8 +64,10 @@ def run_agent(record: dict) -> dict[str, Any]:
     """
     Run the assessment agent on a single record.
 
-    Drives the LLM through tool calls until it produces a final answer or
-    MAX_ITERATIONS is reached.
+    The loss-prediction model is called unconditionally before the LLM loop —
+    there is no decision to be made about whether to run it. The LLM receives
+    the prediction result in its initial prompt and decides whether to call
+    retrieve_similar_records for additional context.
 
     Args:
         record: The record dict to assess (fields from new_record.json).
@@ -77,23 +76,30 @@ def run_agent(record: dict) -> dict[str, Any]:
         A dict containing at minimum a "recommendation" key with the agent's
         final text. Add any other fields your AssessResponse requires.
     """
+    # Always run the model first — deterministic, no LLM involvement.
+    prediction = run_predict_loss(record)
+    tools_used: list[str] = ["predict_loss"]
+
     client = get_client()
     messages: list[Any] = [
         {
             "role": "user",
-            "content": f"Please assess this record:\n\n{json.dumps(record, indent=2)}",
+            "content": (
+                f"Please assess this record:\n\n{json.dumps(record, indent=2)}\n\n"
+                f"The loss-prediction model has already been run. Here is its output:\n\n"
+                f"{json.dumps(prediction, indent=2)}"
+            ),
         }
     ]
 
     response: anthropic.types.Message | None = None
-    tools_used: list[str] = []
 
     for _ in range(MAX_ITERATIONS):
         response = client.messages.create(
             model=MODEL,
             max_tokens=2048,
             system=SYSTEM_PROMPT,
-            tools=TOOLS,  # type: ignore[arg-type]
+            tools=RETRIEVAL_TOOLS,  # type: ignore[arg-type]
             messages=messages,
         )
 
@@ -136,8 +142,8 @@ def run_agent(record: dict) -> dict[str, Any]:
         "No recommendation produced.",
     )
 
-    # tools_used is provided as a starting point. Add any other fields to this dict
-    # that you think are worth capturing — what the agent did, how confident it was,
-    # whether it hit any uncertainty conditions. What you choose to surface here is
-    # itself a design decision.
-    return {"recommendation": final_text, "tools_used": tools_used}
+    return {
+        "recommendation": final_text,
+        "tools_used": tools_used,
+        "prediction": prediction,
+    }

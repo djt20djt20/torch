@@ -82,6 +82,10 @@ TOOLS: list[dict] = [
     },
 ]
 
+# Subset exposed to the agent — predict_loss is called directly before the LLM
+# loop, so the agent only needs access to the retrieval tool.
+RETRIEVAL_TOOLS: list[dict] = [t for t in TOOLS if t["name"] == "retrieve_similar_records"]
+
 
 # ── Tool implementations ──────────────────────────────────────────────────────
 
