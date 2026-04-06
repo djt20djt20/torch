@@ -17,7 +17,7 @@ import os
 import anthropic
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 MODEL = "claude-sonnet-4-6"
 

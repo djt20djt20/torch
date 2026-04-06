@@ -1,0 +1,7 @@
+Improve model, agent robustness, and API response contract
+
+- Retrain model with class_weight='balanced' and 80th-percentile loss threshold (0.9818)
+- Add confidence, requires_review, and model_warnings to AssessResponse
+- Track truncated and iteration_limit_reached in agent loop and eval
+- Drop classification report; add PR-AUC with baseline and F2 threshold selection to notebook
+- Update APPROACH.md: correct MAX_ITERATIONS, AI tools section, production monitoring

@@ -14,8 +14,11 @@ looks like, then run this to see how your agent performs across the eval set.
 from __future__ import annotations
 
 import json
+import sys
 import time
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 # ── Load eval set ─────────────────────────────────────────────────────────────
 
@@ -30,9 +33,7 @@ def load_eval_set() -> list[dict]:
 
 def score_recommendation(recommendation: str, ground_truth: dict) -> dict:
     """
-    Score a single agent recommendation against the ground truth.
-
-    TODO — implement this function.
+    Score a single agent recommendation against the ground truth (LLM-as-judge).
 
     Args:
         recommendation: The agent's free-text recommendation string.
@@ -69,10 +70,78 @@ def score_recommendation(recommendation: str, ground_truth: dict) -> dict:
     and clear cases — use these to analyse whether your agent's calibration holds
     up under different conditions, not just its average accuracy.
     """
-    raise NotImplementedError(
-        "Implement score_recommendation() in evals/eval.py. "
-        "See the docstring above for guidance on what to measure."
+    from app.llm import MODEL, get_client
+
+    is_loss_making: bool = ground_truth["is_loss_making"]
+    loss_ratio: float = ground_truth["loss_ratio"]
+    case_type: str = ground_truth.get("case_type", "clear")
+    is_borderline = case_type == "borderline" or abs(loss_ratio - 1.0) < 0.05
+
+    judge_prompt = f"""You are evaluating an AI insurance underwriting agent's recommendation.
+
+## Ground truth
+- Actual outcome: {"LOSS-MAKING" if is_loss_making else "NOT loss-making"} (loss_ratio={loss_ratio:.4f})
+- Case type: {"borderline (loss_ratio close to 1.0)" if is_borderline else "clear-cut"}
+
+## Agent recommendation
+{recommendation}
+
+## Your task
+Score the recommendation on these three dimensions. Reply with a JSON object only — no prose.
+
+1. **outcome_alignment** (0 or 1):
+   - 1 if the recommendation correctly points toward the actual outcome (loss-making or not), OR if it expresses genuine uncertainty on a borderline case (loss_ratio within 0.05 of 1.0).
+   - 0 if it confidently points in the wrong direction.
+
+2. **calibration** (0 or 1):
+   - 1 if expressed certainty is proportionate to how clear-cut the case is. A confident wrong answer on a borderline case scores 0. Expressed uncertainty on a borderline case scores 1.
+   - 0 if the recommendation is confidently wrong, or confidently right on a borderline case with a loss_ratio very close to 1.0 (over-confidence even when correct is a calibration failure).
+
+3. **safe_deferral** (0 or 1):
+   - 1 if the recommendation appropriately recommends human review when evidence is weak (low model confidence, tool failure, borderline case).
+   - 0 if it issues an approve/decline verdict without adequate evidence, or fails to escalate a genuinely uncertain case.
+
+Return exactly this JSON:
+{{
+  "outcome_alignment": 0 or 1,
+  "outcome_alignment_reason": "one sentence",
+  "calibration": 0 or 1,
+  "calibration_reason": "one sentence",
+  "safe_deferral": 0 or 1,
+  "safe_deferral_reason": "one sentence"
+}}"""
+
+    client = get_client()
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=512,
+        messages=[{"role": "user", "content": judge_prompt}],
     )
+    raw = response.content[0].text.strip()
+
+    try:
+        parsed = json.loads(raw)
+    except json.JSONDecodeError:
+        import re
+        match = re.search(r"\{.*\}", raw, re.DOTALL)
+        parsed = json.loads(match.group()) if match else {}
+
+    dims = {
+        "outcome_alignment": {"score": parsed.get("outcome_alignment", 0), "reason": parsed.get("outcome_alignment_reason", "")},
+        "calibration":        {"score": parsed.get("calibration", 0),        "reason": parsed.get("calibration_reason", "")},
+        "safe_deferral":      {"score": parsed.get("safe_deferral", 0),      "reason": parsed.get("safe_deferral_reason", "")},
+    }
+    total = sum(d["score"] for d in dims.values())
+    correct = total >= 2
+
+    return {
+        "correct": correct,
+        "total_score": total,
+        "max_score": 3,
+        "is_borderline": is_borderline,
+        "dimensions": dims,
+        "reasoning": " | ".join(f"{k}: {v['reason']}" for k, v in dims.items()),
+    }
 
 
 # ── Runner ────────────────────────────────────────────────────────────────────
@@ -81,12 +150,18 @@ def run_eval() -> None:
     """
     Run the agent against every record in the eval set and print a summary.
 
-    TODO — wire this up to your agent once Part 2 / Part 3 is implemented.
-
-    The agent call below is a placeholder. Replace it with a real call to your
-    /assess endpoint or directly to your agent function.
+    Calls `run_agent` directly (same code path as `POST /assess`).
     """
-    import httpx  # pip install httpx, or use requests
+    print("Importing agent...", flush=True)
+    t0 = time.time()
+    from app.agent import run_agent
+    print(f"  Agent imported in {time.time() - t0:.1f}s", flush=True)
+
+    print("Pre-warming vectorstore...", flush=True)
+    t0 = time.time()
+    from app import vectorstore
+    vectorstore.init()
+    print(f"  Vectorstore ready in {time.time() - t0:.1f}s\n", flush=True)
 
     eval_set = load_eval_set()
     results = []
@@ -95,24 +170,30 @@ def run_eval() -> None:
         record = {k: v for k, v in item.items() if k != "ground_truth"}
         ground_truth = item["ground_truth"]
 
-        print(f"[{i + 1}/{len(eval_set)}] Assessing {record['record_id']}...", end=" ")
-
+        print(f"[{i + 1}/{len(eval_set)}] Assessing {record['record_id']}...", flush=True)
         start = time.time()
 
-        # TODO: replace with your actual agent call
-        # Option A — call the /assess endpoint directly:
-        # response = httpx.post("http://localhost:8000/assess", json={"record": record})
-        # recommendation = response.json()["recommendation"]
+        print(f"  [+{time.time()-start:.1f}s] Calling LLM agent (ML + retrieval + synthesis)...", flush=True)
+        result = run_agent(record)
+        recommendation = result["recommendation"]
+        components_used = result.get("tools_used", [])
+        truncated = result.get("truncated", False)
+        iteration_limit_reached = result.get("iteration_limit_reached", False)
 
-        # Option B — call your agent function directly (faster, no HTTP overhead):
-        # from app.main import run_agent
-        # recommendation = run_agent(record)
+        warnings = []
+        if truncated:
+            warnings.append("WARN: max_tokens hit — response may be cut off")
+        if iteration_limit_reached:
+            warnings.append("WARN: MAX_ITERATIONS reached — agent loop did not finish naturally")
+        for w in warnings:
+            print(f"  {w}", flush=True)
 
-        # Placeholder:
-        recommendation = "[agent not yet wired up]"
+        print(f"  [+{time.time()-start:.1f}s] Agent done. Components used: {components_used}", flush=True)
 
-        elapsed = time.time() - start
+        print(f"  [+{time.time()-start:.1f}s] Scoring with judge LLM...", flush=True)
         score = score_recommendation(recommendation, ground_truth)
+        elapsed = time.time() - start
+
         results.append(
             {
                 "record_id": record["record_id"],
@@ -120,17 +201,19 @@ def run_eval() -> None:
                 "recommendation": recommendation,
                 "score": score,
                 "latency_s": round(elapsed, 2),
+                "truncated": truncated,
+                "iteration_limit_reached": iteration_limit_reached,
             }
         )
-        status = "✓" if score.get("correct") else "✗"
-        print(f"{status} ({elapsed:.1f}s)")
+        status = "OK" if score.get("correct") else "FAIL"
+        print(f"  [+{time.time()-start:.1f}s] {status} (total: {elapsed:.1f}s)\n", flush=True)
 
     # ── Summary ───────────────────────────────────────────────────────────────
     n = len(results)
     n_correct = sum(1 for r in results if r["score"].get("correct"))
     avg_latency = sum(r["latency_s"] for r in results) / n
 
-    print(f"\n{'─' * 40}")
+    print(f"\n{'-' * 40}")
     print(f"Results: {n_correct}/{n} correct ({n_correct / n:.0%})")
     print(f"Average latency: {avg_latency:.1f}s")
 
@@ -142,6 +225,19 @@ def run_eval() -> None:
     if not_loss_making:
         tn = sum(1 for r in not_loss_making if r["score"].get("correct"))
         print(f"Non-loss-making records correct: {tn}/{len(not_loss_making)}")
+
+    n_truncated = sum(1 for r in results if r.get("truncated"))
+    n_iter_limit = sum(1 for r in results if r.get("iteration_limit_reached"))
+    if n_truncated:
+        truncated_ids = [r["record_id"] for r in results if r.get("truncated")]
+        print(f"max_tokens hit: {n_truncated}/{n} ({', '.join(truncated_ids)})")
+    else:
+        print(f"max_tokens hit: 0/{n}")
+    if n_iter_limit:
+        iter_limit_ids = [r["record_id"] for r in results if r.get("iteration_limit_reached")]
+        print(f"MAX_ITERATIONS reached: {n_iter_limit}/{n} ({', '.join(iter_limit_ids)})")
+    else:
+        print(f"MAX_ITERATIONS reached: 0/{n}")
 
     # Write full results to file for inspection
     out = Path(__file__).parent / "eval_results.json"

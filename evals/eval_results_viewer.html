@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eval results</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --border: #2d3a4f;
+      --text: #e7ecf3;
+      --muted: #8b9cb3;
+      --accent: #5b9fd4;
+      --ok: #3d9970;
+      --bad: #c44c4c;
+      --warn: #d4a017;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 0.75rem;
+    }
+    .toolbar label { font-size: 0.875rem; color: var(--muted); }
+    input[type="search"], select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.4rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+    }
+    input[type="search"] { min-width: 200px; }
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+    .stats strong { color: var(--text); }
+    .dropzone {
+      margin: 1rem 1.5rem;
+      padding: 2rem;
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      text-align: center;
+      color: var(--muted);
+      display: none;
+    }
+    .dropzone.visible { display: block; }
+    .dropzone.drag { border-color: var(--accent); background: rgba(91, 159, 212, 0.08); }
+    main { padding: 1rem 1.5rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+    .card-head {
+      padding: 0.85rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 1rem;
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid transparent;
+    }
+    .card-head:hover { background: rgba(255,255,255,0.03); }
+    .card.open .card-head { border-bottom-color: var(--border); }
+    .record-id { font-weight: 600; font-size: 1rem; }
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .badge.loss { background: rgba(196, 76, 76, 0.25); color: #f0a8a8; }
+    .badge.profit { background: rgba(61, 153, 112, 0.25); color: #8fd4b8; }
+    .badge.borderline { background: rgba(212, 160, 23, 0.2); color: #e8c96a; }
+    .badge.score-ok { background: rgba(61, 153, 112, 0.2); color: #8fd4b8; }
+    .badge.score-partial { background: rgba(212, 160, 23, 0.2); color: #e8c96a; }
+    .badge.score-bad { background: rgba(196, 76, 76, 0.2); color: #f0a8a8; }
+    .latency { font-size: 0.8125rem; color: var(--muted); margin-left: auto; }
+    .chev { color: var(--muted); font-size: 0.75rem; transition: transform 0.15s; }
+    .card.open .chev { transform: rotate(90deg); }
+    .card-body { display: none; padding: 1rem; }
+    .card.open .card-body { display: block; }
+    .grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 800px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+    .panel {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem;
+    }
+    .panel h3 {
+      margin: 0 0 0.5rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .gt-row { font-size: 0.875rem; margin: 0.25rem 0; }
+    .gt-row span { color: var(--muted); }
+    .dims { margin-top: 0.75rem; }
+    .dim {
+      margin-top: 0.65rem;
+      padding-top: 0.65rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8125rem;
+    }
+    .dim:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+    .dim-name { font-weight: 600; color: var(--accent); }
+    .dim-score { float: right; color: var(--muted); }
+    .reasoning-full {
+      margin-top: 0.75rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .recommendation {
+      font-size: 0.875rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 50vh;
+      overflow-y: auto;
+      line-height: 1.55;
+    }
+    .recommendation h2, .recommendation h3 {
+      margin: 1rem 0 0.5rem;
+      font-size: 1rem;
+      color: var(--text);
+    }
+    .recommendation h2:first-child, .recommendation h3:first-child { margin-top: 0; }
+    .recommendation strong { color: #c8d8ec; }
+    .empty { color: var(--muted); padding: 2rem; text-align: center; }
+    .err { color: #f0a8a8; padding: 1rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Eval results</h1>
+    <p style="margin:0;font-size:0.875rem;color:var(--muted);">
+      Loads <code style="color:var(--accent);">eval_results.json</code> from this folder when served over HTTP.
+      If nothing loads, use the file picker below or run
+      <code style="color:var(--accent);">python -m http.server</code> from the <code>evals</code> directory.
+    </p>
+    <div class="toolbar">
+      <label>Search <input type="search" id="q" placeholder="record id…" autocomplete="off" /></label>
+      <label>Filter
+        <select id="filter">
+          <option value="all">All</option>
+          <option value="correct">Correct only</option>
+          <option value="incorrect">Incorrect only</option>
+        </select>
+      </label>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="dropzone" id="dropzone">
+    <p><strong>Drop</strong> <code>eval_results.json</code> here or</p>
+    <p style="margin-top:0.75rem;">
+      <input type="file" id="file" accept=".json,application/json" />
+    </p>
+  </div>
+
+  <main id="main"></main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    /** Lightweight markdown-ish formatting for recommendations */
+    function formatRecommendation(text) {
+      let h = escapeHtml(text);
+      h = h.replace(/^### (.+)$/gm, "<h3>$1</h3>");
+      h = h.replace(/^## (.+)$/gm, "<h2>$1</h2>");
+      h = h.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+      h = h.replace(/\n/g, "<br>\n");
+      return h;
+    }
+
+    function scoreBadgeClass(total, max) {
+      if (total === max) return "score-ok";
+      if (total === 0) return "score-bad";
+      return "score-partial";
+    }
+
+    let rawData = [];
+
+    function renderStats(rows) {
+      const n = rows.length;
+      if (!n) {
+        $("stats").innerHTML = "";
+        return;
+      }
+      const correct = rows.filter((r) => r.score && r.score.correct).length;
+      const avgScore =
+        rows.reduce((s, r) => s + (r.score ? r.score.total_score : 0), 0) / n;
+      const avgMax =
+        rows.reduce((s, r) => s + (r.score ? r.score.max_score : 3), 0) / n;
+      const lat = rows.filter((r) => typeof r.latency_s === "number");
+      const avgLat = lat.length
+        ? lat.reduce((s, r) => s + r.latency_s, 0) / lat.length
+        : null;
+      $("stats").innerHTML = `
+        <span><strong>${n}</strong> records</span>
+        <span><strong>${correct}</strong> / ${n} correct (${((100 * correct) / n).toFixed(1)}%)</span>
+        <span>Avg score <strong>${avgScore.toFixed(2)}</strong> / ${avgMax.toFixed(2)}</span>
+        ${
+          avgLat != null
+            ? `<span>Avg latency <strong>${avgLat.toFixed(1)}</strong>s</span>`
+            : ""
+        }
+      `;
+    }
+
+    function render() {
+      const q = $("q").value.trim().toLowerCase();
+      const f = $("filter").value;
+      let rows = rawData.slice();
+      if (q) rows = rows.filter((r) => (r.record_id || "").toLowerCase().includes(q));
+      if (f === "correct") rows = rows.filter((r) => r.score && r.score.correct);
+      if (f === "incorrect") rows = rows.filter((r) => r.score && !r.score.correct);
+
+      renderStats(rows);
+
+      const main = $("main");
+      if (!rawData.length) {
+        main.innerHTML = '<p class="empty">No data loaded yet.</p>';
+        return;
+      }
+      if (!rows.length) {
+        main.innerHTML = '<p class="empty">No records match your filters.</p>';
+        return;
+      }
+
+      main.innerHTML = rows
+        .map((r, i) => {
+          const gt = r.ground_truth || {};
+          const sc = r.score || {};
+          const dims = sc.dimensions || {};
+          const loss = gt.is_loss_making;
+          const lr = gt.loss_ratio;
+          const border = gt.case_type === "borderline" || sc.is_borderline;
+          const ts = sc.total_score ?? 0;
+          const ms = sc.max_score ?? 3;
+          const dimHtml = ["outcome_alignment", "calibration", "safe_deferral"]
+            .map((k) => {
+              const d = dims[k];
+              if (!d) return "";
+              const label = k.replace(/_/g, " ");
+              return `<div class="dim"><span class="dim-score">${d.score}/1</span><div class="dim-name">${escapeHtml(
+                label
+              )}</div><div>${escapeHtml(d.reason || "")}</div></div>`;
+            })
+            .join("");
+
+          return `<article class="card" data-idx="${i}">
+            <div class="card-head" role="button" tabindex="0" aria-expanded="false">
+              <span class="record-id">${escapeHtml(r.record_id || "")}</span>
+              <span class="badge ${loss ? "loss" : "profit"}">${loss ? "Loss-making" : "Not loss-making"}</span>
+              ${
+                border
+                  ? '<span class="badge borderline">Borderline</span>'
+                  : ""
+              }
+              <span class="badge ${scoreBadgeClass(ts, ms)}">${ts}/${ms} · ${
+            sc.correct ? "correct" : "incorrect"
+          }</span>
+              ${
+                typeof r.latency_s === "number"
+                  ? `<span class="latency">${r.latency_s}s</span>`
+                  : ""
+              }
+              <span class="chev">▶</span>
+            </div>
+            <div class="card-body">
+              <div class="grid">
+                <div class="panel">
+                  <h3>Ground truth</h3>
+                  <div class="gt-row"><span>Loss ratio</span> ${lr != null ? lr : "—"}</div>
+                  <div class="gt-row"><span>Case type</span> ${escapeHtml(gt.case_type || "—")}</div>
+                  <h3 style="margin-top:1rem;">Score</h3>
+                  <div class="dims">${dimHtml || "<p class=\"muted\">No dimension breakdown</p>"}</div>
+                  ${
+                    sc.reasoning
+                      ? `<div class="reasoning-full">${escapeHtml(sc.reasoning)}</div>`
+                      : ""
+                  }
+                </div>
+                <div class="panel">
+                  <h3>Recommendation</h3>
+                  <div class="recommendation">${formatRecommendation(
+                    r.recommendation || ""
+                  )}</div>
+                </div>
+              </div>
+            </div>
+          </article>`;
+        })
+        .join("");
+
+      main.querySelectorAll(".card-head").forEach((head) => {
+        const toggle = () => {
+          const card = head.closest(".card");
+          const open = !card.classList.contains("open");
+          card.classList.toggle("open", open);
+          head.setAttribute("aria-expanded", open);
+        };
+        head.addEventListener("click", toggle);
+        head.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toggle();
+          }
+        });
+      });
+    }
+
+    function setData(data) {
+      if (!Array.isArray(data)) {
+        $("main").innerHTML =
+          '<p class="err">Expected a JSON array of result objects.</p>';
+        return;
+      }
+      rawData = data;
+      $("dropzone").classList.remove("visible");
+      render();
+    }
+
+    function showDropzone() {
+      $("dropzone").classList.add("visible");
+    }
+
+    $("q").addEventListener("input", render);
+    $("filter").addEventListener("change", render);
+
+    $("file").addEventListener("change", (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          setData(JSON.parse(reader.result));
+        } catch (err) {
+          $("main").innerHTML =
+            '<p class="err">Could not parse JSON: ' + escapeHtml(String(err)) + "</p>";
+        }
+      };
+      reader.readAsText(file, "utf-8");
+    });
+
+    const dz = $("dropzone");
+    ["dragenter", "dragover"].forEach((ev) => {
+      dz.addEventListener(ev, (e) => {
+        e.preventDefault();
+        dz.classList.add("drag");
+      });
+    });
+    ["dragleave", "drop"].forEach((ev) => {
+      dz.addEventListener(ev, (e) => {
+        e.preventDefault();
+        dz.classList.remove("drag");
+      });
+    });
+    dz.addEventListener("drop", (e) => {
+      const f = e.dataTransfer.files[0];
+      if (!f || !/\.json$/i.test(f.name)) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          setData(JSON.parse(reader.result));
+        } catch (err) {
+          $("main").innerHTML =
+            '<p class="err">Could not parse JSON: ' + escapeHtml(String(err)) + "</p>";
+        }
+      };
+      reader.readAsText(f, "utf-8");
+    });
+
+    fetch("eval_results.json")
+      .then((r) => {
+        if (!r.ok) throw new Error(r.statusText);
+        return r.json();
+      })
+      .then(setData)
+      .catch(() => {
+        showDropzone();
+        $("main").innerHTML =
+          '<p class="empty">Could not load eval_results.json automatically. Use the file picker above.</p>';
+      });
+  </script>
+</body>
+</html>

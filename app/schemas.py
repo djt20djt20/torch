@@ -31,5 +31,11 @@ class AssessRequest(BaseModel):
 
 class AssessResponse(BaseModel):
     record_id: str
-    recommendation: str  # Keep this — the core output for the reviewer
-    tools_used: list[str]  # Which tools the agent called — e.g. ["predict_loss", "retrieve_similar_records"]
+    recommendation: str        # Full narrative for the reviewer — primary human-readable output
+    confidence: float | None = None   # Calibrated model probability (0–1); None if model unavailable
+    requires_review: bool = True      # True when confidence is low, OOD warnings present, or model unavailable
+    model_warnings: list[str] = []    # Structured OOD / extreme-value flags from the model artifact
+    components_used: list[str] = []   # Audit trail of what ran — e.g. ["predict_loss", "retrieve_similar_records"]
+    model_available: bool = True      # False when ML artifact missing / predict failed — retrieval-only fallback
+    truncated: bool = False           # True if the LLM hit max_tokens and the response may be cut off
+    iteration_limit_reached: bool = False  # True if MAX_ITERATIONS was exhausted before end_turn

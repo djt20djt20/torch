@@ -115,8 +115,10 @@ def run_predict_loss(record: dict) -> dict:
         artifact = _model.load_model()
     except FileNotFoundError as e:
         return {"error": str(e)}
-
-    return _model.predict(artifact, record)
+    try:
+        return _model.predict(artifact, record)
+    except Exception as e:
+        return {"error": f"Model prediction failed: {e}"}
 
 
 def run_retrieve_similar_records(query: str, n_results: int = 3) -> list[dict]:

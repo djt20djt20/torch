@@ -20,6 +20,7 @@ from typing import Any
 import anthropic
 
 from app.llm import MODEL, get_client
+from app.model import EXTREME_RAW_WARNING_PREFIX
 from app.tools import RETRIEVAL_TOOLS, dispatch_tool, run_predict_loss
 
 # The model is always called unconditionally before the agent loop — there is no
@@ -53,10 +54,36 @@ Your final recommendation must:
 - Explain the 2–3 most important factors driving that view (from the model's top features), in plain English.
 - Reference the most relevant historical cases if retrieval returned useful matches, with a one-sentence description of why they are relevant.
 - Flag any data quality issues or out-of-distribution warnings raised by the model.
+- If any warning begins with "Extreme raw value —", say clearly in your recommendation that an extreme or implausible input was detected, name the field(s), and tell the underwriter to confirm the data before acting — the numeric prediction still used the submitted values.
 - Recommend a specific action: approve, decline, or refer for senior review.
 - If confidence is low (below 0.55), or if retrieval found no close matches, explicitly say the evidence is weak and recommend human review.
 
 Do not include raw scores, JSON, or field names in your recommendation. Write for an underwriter, not an engineer.
+"""
+
+# When the ML artifact is missing or predict() fails, we still run the LLM with
+# retrieval only — never invent model scores or confidence.
+SYSTEM_PROMPT_RETRIEVAL_ONLY: str = """You are an insurance underwriting assistant helping reviewers assess incoming records.
+
+**The quantitative loss-prediction model is unavailable** (artifact missing or failed to run). You do not have ML confidence scores, SHAP features, or model warnings — do not invent them.
+
+## Tool
+
+You have one tool: **retrieve_similar_records** — search the historical archive for similar past records.
+- You **must** call this tool exactly once to gather context, unless the tool returns a hard error in the result.
+- Write the query as a plain-English description of the account (e.g. "cyber insurance for a healthcare company in APAC with prior claims").
+- If cosine distance is above 0.4, say the matches are not close — do not cite them as strong precedents.
+
+## Recommendation format
+
+Your final recommendation must:
+- **State up front** that the automated loss model could not be run, so there is no ML probability for this assessment — only qualitative comparison to history and professional judgement.
+- Summarise what similar historical cases suggest, or say evidence from retrieval is weak if distances are high or matches are irrelevant.
+- Give a sensible qualitative read of the record (risk type, limits, claims history, etc.) without claiming false precision.
+- **Recommend refer for senior review** in almost all cases; only if retrieval returns very close, clearly relevant comparables may you suggest a slightly more specific next step — still with explicit human oversight.
+- Never assign a numeric "model confidence" or say the model predicted loss-making / not — it did not run.
+
+Do not include raw JSON or internal field names. Write for an underwriter, not an engineer.
 """
 
 
@@ -76,37 +103,78 @@ def run_agent(record: dict) -> dict[str, Any]:
         A dict containing at minimum a "recommendation" key with the agent's
         final text. Add any other fields your AssessResponse requires.
     """
-    # Always run the model first — deterministic, no LLM involvement.
+    # Always attempt the model first — deterministic, no LLM involvement.
     prediction = run_predict_loss(record)
-    tools_used: list[str] = ["predict_loss"]
+    model_available = "error" not in prediction
+    tools_used: list[str] = ["predict_loss"] if model_available else []  # internal name kept for backward compat
+
+    extreme_raw: list[str] = []
+    extreme_note = ""
+    if model_available:
+        extreme_raw = [
+            w
+            for w in prediction.get("warnings", [])
+            if isinstance(w, str) and w.startswith(EXTREME_RAW_WARNING_PREFIX)
+        ]
+        if extreme_raw:
+            extreme_note = (
+                "\n\nData quality: one or more raw input fields look extreme or implausible "
+                "(see warnings in the model output that start with \"Extreme raw value\"). "
+                "Call this out prominently in your recommendation and advise verifying "
+                "those fields with the submitter; the model score was computed from the "
+                "values exactly as shown in the record above.\n"
+            )
+
+    if model_available:
+        user_intro = (
+            f"Please assess this record:\n\n{json.dumps(record, indent=2)}\n\n"
+            f"The loss-prediction model has already been run. Here is its output:\n\n"
+            f"{json.dumps(prediction, indent=2)}"
+            f"{extreme_note}"
+        )
+        system = SYSTEM_PROMPT
+    else:
+        user_intro = (
+            f"Please assess this record:\n\n{json.dumps(record, indent=2)}\n\n"
+            "The loss-prediction model could not be run. Reason:\n\n"
+            f"{prediction.get('error', 'Unknown error')}\n\n"
+            "Follow the retrieval-only instructions in your system prompt. "
+            "Do not invent model scores or confidence."
+        )
+        system = SYSTEM_PROMPT_RETRIEVAL_ONLY
 
     client = get_client()
-    messages: list[Any] = [
-        {
-            "role": "user",
-            "content": (
-                f"Please assess this record:\n\n{json.dumps(record, indent=2)}\n\n"
-                f"The loss-prediction model has already been run. Here is its output:\n\n"
-                f"{json.dumps(prediction, indent=2)}"
-            ),
-        }
-    ]
+    messages: list[Any] = [{"role": "user", "content": user_intro}]
 
     response: anthropic.types.Message | None = None
+    truncated = False       # True if max_tokens was hit on the final response
+    iterations_used = 0
 
     for _ in range(MAX_ITERATIONS):
+        iterations_used += 1
         response = client.messages.create(
             model=MODEL,
             max_tokens=2048,
-            system=SYSTEM_PROMPT,
+            system=system,
             tools=RETRIEVAL_TOOLS,  # type: ignore[arg-type]
             messages=messages,
         )
 
         messages.append({"role": "assistant", "content": response.content})
 
-        if response.stop_reason == "end_turn":
+        # Anthropic stop_reason values:
+        #   "end_turn"      — model finished naturally; normal exit
+        #   "tool_use"      — model wants to call a tool; dispatch and continue
+        #   "max_tokens"    — hit max_tokens limit mid-response; break to avoid
+        #                     re-sending a truncated message as a new turn
+        #   "stop_sequence" — hit a stop sequence; treat as done
+        # Anything other than "tool_use" should exit the loop.
+        if response.stop_reason == "max_tokens":
+            truncated = True
             break
+
+        if response.stop_reason != "tool_use":
+            break  # covers "end_turn", "stop_sequence", and any future values
 
         if response.stop_reason == "tool_use":
             tool_results = []
@@ -130,6 +198,13 @@ def run_agent(record: dict) -> dict[str, Any]:
                     )
             messages.append({"role": "user", "content": tool_results})
 
+    # If we exhausted all iterations without an end_turn, the loop hit its cap.
+    iteration_limit_reached = (
+        iterations_used == MAX_ITERATIONS
+        and response is not None
+        and response.stop_reason == "tool_use"
+    )
+
     if response is None:
         raise RuntimeError("Agent produced no response.")
 
@@ -146,4 +221,7 @@ def run_agent(record: dict) -> dict[str, Any]:
         "recommendation": final_text,
         "tools_used": tools_used,
         "prediction": prediction,
+        "model_available": model_available,
+        "truncated": truncated,                          # max_tokens hit on final response
+        "iteration_limit_reached": iteration_limit_reached,  # MAX_ITERATIONS exhausted
     }

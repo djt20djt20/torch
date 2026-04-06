@@ -47,9 +47,27 @@ def assess(request: AssessRequest) -> AssessResponse:
     except EnvironmentError as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-    # TODO: unpack `result` into your AssessResponse fields
+    prediction = result.get("prediction", {})
+    confidence = prediction.get("confidence") if result.get("model_available") else None
+    model_warnings = prediction.get("warnings", [])
+
+    # requires_review is true when the model is unavailable, confidence is low
+    # (below 0.55), or any data quality / OOD warnings were raised.
+    requires_review = (
+        not result.get("model_available", True)
+        or confidence is None
+        or confidence < 0.55
+        or len(model_warnings) > 0
+    )
+
     return AssessResponse(
         record_id=request.record.get("record_id", "unknown"),
         recommendation=result["recommendation"],
-        tools_used=result.get("tools_used", []),
+        confidence=confidence,
+        requires_review=requires_review,
+        model_warnings=model_warnings,
+        components_used=result.get("tools_used", []),
+        truncated=result.get("truncated", False),
+        iteration_limit_reached=result.get("iteration_limit_reached", False),
+        model_available=result.get("model_available", True),
     )

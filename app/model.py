@@ -28,6 +28,10 @@ _CAT_COLS = ["risk_type", "territory", "industry", "broker"]
 # All expected raw input columns (excluding target and loss_ratio)
 _EXPECTED_COLS = _RAW_NUMERIC_COLS + _CAT_COLS
 
+# Warnings that start with this prefix mean a raw field looks implausible; the agent
+# surfaces them explicitly to the underwriter (values are not imputed at runtime).
+EXTREME_RAW_WARNING_PREFIX = "Extreme raw value —"
+
 
 def load_model() -> Any:
     """
@@ -63,6 +67,8 @@ def predict(model: Any, record: dict) -> dict:
             top_features               (list)   — feature names ranked by |SHAP value|
             shap_values                (dict)   — {feature: shap_value} for this record
             warnings                   (list)   — data quality / OOD notices for the caller
+                (implausible raw values: out-of-range vs training min–max, impossible
+                negatives, or unseen categories — flagged, not imputed)
     """
     clf = model["model"]
     encoder = model["encoder"]
@@ -103,29 +109,53 @@ def predict(model: Any, record: dict) -> dict:
                 row[col] = "unknown"
 
     # ------------------------------------------------------------------
-    # 3. Replicate EDA outlier corrections applied to the training set
-    #    (transcription-error values that were clamped to median in the notebook)
+    # 3. Flag implausible raw values: impossible (e.g. negative) or outside the
+    #    training min–max range / unknown category (stored in artifact). Values
+    #    are never imputed here — only warnings.
     # ------------------------------------------------------------------
-    if row["limit"] <= 50 or row["limit"] >= 999_999_999:
-        warnings.append(
-            f"'limit' value {row['limit']} looks like a transcription error — "
-            f"replaced with training median ({raw_medians['limit']})."
-        )
-        row["limit"] = raw_medians["limit"]
+    raw_numeric_bounds: dict[str, Any] = model.get("raw_numeric_bounds") or {}
+    raw_categorical_values: dict[str, Any] = model.get("raw_categorical_values") or {}
 
-    if row["premium"] == 0 or row["premium"] >= 14_000_000:
-        warnings.append(
-            f"'premium' value {row['premium']} looks like a transcription error — "
-            f"replaced with training median ({raw_medians['premium']})."
-        )
-        row["premium"] = raw_medians["premium"]
+    for col in _RAW_NUMERIC_COLS:
+        val = row.get(col)
+        if val is None or (isinstance(val, float) and np.isnan(val)):
+            continue
+        try:
+            v = float(val)
+        except (TypeError, ValueError):
+            continue
+        if v < 0:
+            warnings.append(
+                f"{EXTREME_RAW_WARNING_PREFIX} '{col}' is {val} (negative values are impossible "
+                "for this field). The model was run using the value as submitted; verify before "
+                "relying on the score."
+            )
+            continue
+        bounds = raw_numeric_bounds.get(col)
+        if bounds is not None:
+            lo, hi = float(bounds[0]), float(bounds[1])
+            if v < lo or v > hi:
+                warnings.append(
+                    f"{EXTREME_RAW_WARNING_PREFIX} '{col}' is {val}, outside the training "
+                    f"min–max range [{lo:g}, {hi:g}]. The model was run using the value as "
+                    "submitted; verify before relying on the score."
+                )
 
-    if row["years_trading"] < 0:
-        warnings.append(
-            f"'years_trading' is negative ({row['years_trading']}) — "
-            f"replaced with training median ({raw_medians['years_trading']})."
-        )
-        row["years_trading"] = raw_medians["years_trading"]
+    for col in _CAT_COLS:
+        val = row.get(col)
+        if val is None:
+            continue
+        known = raw_categorical_values.get(col)
+        if not known:
+            continue
+        sval = str(val).strip().lower()
+        known_set = known if isinstance(known, set) else set(known)
+        if sval not in known_set:
+            warnings.append(
+                f"{EXTREME_RAW_WARNING_PREFIX} '{col}' value {val!r} does not appear in the "
+                "training data for this category. The model was run using the value as "
+                "submitted; verify before relying on the score."
+            )
 
     # ------------------------------------------------------------------
     # 4. Target-encode categoricals using the saved encoder
@@ -136,7 +166,6 @@ def predict(model: Any, record: dict) -> dict:
     # ------------------------------------------------------------------
     # 5. Feature engineering (must mirror the notebook exactly)
     # ------------------------------------------------------------------
-    limit = df_enc["limit"].iloc[0]
     df_enc["premium_rate"] = (
         df_enc["premium"] / df_enc["limit"].replace(0, np.nan)
     ).fillna(0)
@@ -165,7 +194,7 @@ def predict(model: Any, record: dict) -> dict:
         if lo is not None and (val < lo or val > hi):
             warnings.append(
                 f"Feature '{feat}' value {val:.4g} is outside the training range "
-                f"[{lo:.4g}, {hi:.4g}] (1st–99th percentile). "
+                f"[{lo:.4g}, {hi:.4g}] (5th–95th percentile on the training split). "
                 "Prediction may be less reliable."
             )
 
