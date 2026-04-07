@@ -1,0 +1,11 @@
+{
+  "record_id": "NEW_0001",
+  "risk_type": "cyber",
+  "territory": "EU",
+  "industry": "transport",
+  "limit": 3438000,
+  "premium": 26904,
+  "broker": "Meridian Re",
+  "prior_claims": 1,
+  "years_trading": 4
+}

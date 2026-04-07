@@ -202,7 +202,8 @@ def predict(model: Any, record: dict) -> dict:
     # 8. Predict
     # ------------------------------------------------------------------
     confidence = float(clf.predict_proba(X_input)[0, 1])
-    is_loss_making_prediction = bool(clf.predict(X_input)[0])
+    threshold = float(model.get("threshold", 0.5))
+    is_loss_making_prediction = confidence >= threshold
 
     # ------------------------------------------------------------------
     # 9. SHAP explanations — average across the 5 calibration folds

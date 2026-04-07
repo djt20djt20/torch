@@ -55,8 +55,11 @@ Your final recommendation must:
 - Reference the most relevant historical cases if retrieval returned useful matches, with a one-sentence description of why they are relevant.
 - Flag any data quality issues or out-of-distribution warnings raised by the model.
 - If any warning begins with "Extreme raw value —", say clearly in your recommendation that an extreme or implausible input was detected, name the field(s), and tell the underwriter to confirm the data before acting — the numeric prediction still used the submitted values.
-- Recommend a specific action: approve, decline, or refer for senior review.
-- If confidence is low (below 0.55), or if retrieval found no close matches, explicitly say the evidence is weak and recommend human review.
+- Recommend a specific action: approve, decline, or refer for senior review. Use these confidence bands to guide the action:
+  - Below 0.55: the evidence is weak — explicitly say so and recommend human review.
+  - 0.55 to 0.85: the model has a signal but it is not strong enough to be directive — refer for senior review.
+  - Above 0.85: you may be more directive, provided no data quality warnings were raised.
+- If retrieval found no close matches (all distances above 0.4), treat this as additional uncertainty and move toward referring for senior review regardless of model confidence.
 
 Do not include raw scores, JSON, or field names in your recommendation. Write for an underwriter, not an engineer.
 """
